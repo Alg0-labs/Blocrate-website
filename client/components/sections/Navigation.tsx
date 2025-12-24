@@ -14,13 +14,13 @@ export default function Navigation() {
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden lg:flex items-center gap-12 px-10 py-4 rounded-full border border-white/12 bg-gradient-to-r from-black/6 to-black/24 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)_inset] glassmorphic">
+        {/* <div className="hidden lg:flex items-center gap-12 px-10 py-4 rounded-full border border-white/12 bg-gradient-to-r from-black/6 to-black/24 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)_inset] glassmorphic">
           <a href="#home" className="text-white text-base font-medium hover:text-brand-green transition-colors">Home</a>
           <a href="#about" className="text-white text-base font-medium hover:text-brand-green transition-colors">About</a>
           <a href="#pages" className="text-white text-base font-medium hover:text-brand-green transition-colors">Pages</a>
           <a href="#blog" className="text-white text-base font-medium hover:text-brand-green transition-colors">Blog</a>
           <a href="#contact" className="text-white text-base font-medium hover:text-brand-green transition-colors">Contact Us</a>
-        </div>
+        </div> */}
 
         {/* CTA Button */}
         <button className="hidden lg:inline-flex items-center px-5 py-4 bg-white rounded-full text-brand-dark text-base font-medium hover:bg-brand-green hover:text-black transition-all duration-300">
