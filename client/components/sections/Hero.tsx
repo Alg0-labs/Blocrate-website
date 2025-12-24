@@ -2,14 +2,13 @@ import HeroImage from "@/assets/hero-section.svg";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen bg-black px-4 sm:px-6 lg:px-8 pt-24 pb-24 overflow-hidden">
-      {/* Hero Image with Characters - Covering the whole section */}
-      {/* TODO: Later replace this with spline animation*/}
-      <div className="absolute inset-0 w-full h-full">
-        <img 
-          src={HeroImage} 
-          alt="DeFi Characters" 
-          className="w-full h-full object-cover"
+    <section className="relative w-full bg-black overflow-hidden">
+      {/* Full width background hero image - extends from top and covers left/right */}
+      <div className="relative w-full aspect-[1500/600]">
+        <img
+          src={HeroImage}
+          alt="DeFi Characters"
+          className="absolute inset-0 w-[1500px] h-[600px] object-cover"
         />
 
         {/* Background gradients - full width coverage */}
