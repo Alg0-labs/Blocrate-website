@@ -2,7 +2,7 @@ import HeroImage from "@/assets/hero-section.svg";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 pt-24 pb-24 overflow-hidden">
+    <section className="relative min-h-screen bg-black px-4 sm:px-6 lg:px-8 pt-24 pb-24 overflow-hidden">
       {/* Hero Image with Characters - Covering the whole section */}
       {/* TODO: Later replace this with spline animation*/}
       <div className="absolute inset-0 w-full h-full">
