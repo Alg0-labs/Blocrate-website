@@ -2,7 +2,7 @@ import LogoImage from "@/assets/blocrate-logo.svg";
 
 export default function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+    <nav className="fixed top-0 left-0 right-0 w-full z-50 px-4 sm:px-6 lg:px-8 pt-8 pb-4 bg-black/80 backdrop-blur-sm">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
