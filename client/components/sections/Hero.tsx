@@ -64,6 +64,7 @@ export default function Hero() {
           alt="DeFi Characters"
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
         />
+      </div>
 
         {/* Content container with max-width for text alignment */}
         <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
