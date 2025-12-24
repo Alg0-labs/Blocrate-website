@@ -20,7 +20,7 @@ export default function CTA() {
               </linearGradient>
             </defs>
           </svg>
-          <span className="relative z-10 text-black font-poppins text-2xl font-normal tracking-tight">Join Waitlist</span>
+          <span className="relative z-10 text-black font-manrope text-2xl font-normal tracking-tight">Join Waitlist</span>
         </button>
       </div>
     </section>

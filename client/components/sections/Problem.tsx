@@ -13,7 +13,7 @@ const tileVariants = (direction: "left" | "right") => ({
 
 export default function Problem() {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 py-24">
+    <section className="relative px-4 sm:px-6 lg:px-8 py-14">
       <div className="max-w-[1440px] mx-auto">
         <motion.div
           className="text-center mb-16"
