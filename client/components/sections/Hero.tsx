@@ -2,7 +2,17 @@ import HeroImage from "@/assets/hero-section.svg";
 
 export default function Hero() {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-24 overflow-hidden">
+    <section className="relative min-h-screen px-4 sm:px-6 lg:px-8 pt-24 pb-24 overflow-hidden">
+      {/* Hero Image with Characters - Covering the whole section */}
+      {/* TODO: Later replace this with spline animation*/}
+      <div className="absolute inset-0 w-full h-full">
+        <img 
+          src={HeroImage} 
+          alt="DeFi Characters" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+
       {/* Background gradients */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-[650px] opacity-60">
@@ -23,24 +33,21 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative max-w-[1440px] mx-auto">
+      <div className="relative max-w-[1440px] mx-auto pt-12">
         {/* Hero Image with Characters */}
         <div className="relative mb-12">
-          <img 
-            src={HeroImage} 
-            alt="DeFi Characters" 
-            className="w-full h-auto"
-          />
-          {/* Hero Text Overlays */}
-          <div className="absolute left-[8%] top-[20%] max-w-[315px]">
-            <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-              Private Credit Passports for DeFi
-            </h1>
-          </div>
-          <div className="absolute right-[8%] top-[20%] max-w-[315px] text-right">
-            <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-              Private Credit Passports for DeFi
-            </h1>
+          <div className="relative w-full aspect-[1440/883]">
+            {/* Hero Text Overlays */}
+            <div className="absolute left-[8%] top-[20%] max-w-[315px]">
+              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
+                Private Credit Passports for DeFi
+              </h1>
+            </div>
+            <div className="absolute right-[8%] top-[20%] max-w-[315px] text-right">
+              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
+                Private Credit Passports for DeFi
+              </h1>
+            </div>
           </div>
         </div>
 
