@@ -1,19 +1,45 @@
+import { motion } from "framer-motion";
+
+const tileVariants = (direction: "left" | "right") => ({
+  hidden: {
+    opacity: 0,
+    x: direction === "left" ? -100 : 100,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+});
+
 export default function Problem() {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 py-24">
+    <section className="relative px-4 sm:px-6 lg:px-8 py-14">
       <div className="max-w-[1440px] mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="gradient-text text-5xl font-normal leading-[120%] mb-6">
             Undercollateralized lending still doesn't work.
           </h2>
           <p className="text-brand-gray text-base font-medium leading-[150%] max-w-[715px] mx-auto">
             Anonymous borrowers disappear. On-chain reputation is easy to game. Real cashflow businesses can't access credit without overcollateralizing.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Problem Card 1 */}
-          <div className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300">
+          <motion.div
+            className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={tileVariants("left")}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <svg className="w-10 h-10 mb-8" viewBox="0 0 40 40" fill="none">
               <defs>
                 <linearGradient id="grad1" x1="4.1991" y1="3.06491" x2="44.8335" y2="50.1724">
@@ -29,10 +55,17 @@ export default function Problem() {
             <p className="text-brand-gray text-base font-medium leading-[150%]">
               Borrowers can disappear without accountability.
             </p>
-          </div>
+          </motion.div>
 
           {/* Problem Card 2 */}
-          <div className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300">
+          <motion.div
+            className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={tileVariants("right")}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          >
             <svg className="w-10 h-10 mb-8" viewBox="0 0 46 55" fill="none">
               <defs>
                 <linearGradient id="grad2" x1="4.77959" y1="8.53867" x2="51.0362" y2="62.6102">
@@ -48,10 +81,17 @@ export default function Problem() {
             <p className="text-brand-gray text-base font-medium leading-[150%]">
               On-chain history is easy to fake or reset.
             </p>
-          </div>
+          </motion.div>
 
           {/* Problem Card 3 */}
-          <div className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300">
+          <motion.div
+            className="group relative rounded-[10px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8 hover:border-brand-green/40 transition-all duration-300"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={tileVariants("left")}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
             <svg className="w-10 h-10 mb-8" viewBox="0 0 40 48" fill="none">
               <defs>
                 <linearGradient id="grad3" x1="4.13044" y1="7.32538" x2="42.7357" y2="54.1479">
@@ -67,7 +107,7 @@ export default function Problem() {
             <p className="text-brand-gray text-base font-medium leading-[150%]">
               Real businesses must lock excess capital.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

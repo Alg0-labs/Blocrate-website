@@ -105,8 +105,12 @@
     @apply border-border;
   }
 
+  html {
+    @apply bg-black;
+  }
+
   body {
-    @apply bg-background text-foreground font-manrope;
+    @apply bg-black text-foreground font-manrope;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
