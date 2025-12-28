@@ -100,7 +100,7 @@ export default function JoinWaitlistButton({
 
   if (variant === "with-logo") {
     return (
-      <div className={`group relative inline-flex flex-col items-center ${className}`}>
+      <div className={`group relative inline-flex flex-col items-center justify-start ${className}`}>
         {/* SVG Gradient Definition */}
         <svg width="0" height="0" className="absolute">
           <defs>
