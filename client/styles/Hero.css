@@ -1,0 +1,26 @@
+.gradient-spread {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 0.3s ease-out 0.5s;
+}
+
+.group:hover .gradient-spread {
+  clip-path: circle(150% at 50% 50%);
+}
+
+.logo-fade-out {
+  opacity: 1;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out 0.5s;
+}
+
+.group:hover .logo-fade-out {
+  opacity: 0 !important;
+}
+
+.waitlist-text-white {
+  transition: color 0.3s ease-out 0.5s;
+}
+
+.group:hover .waitlist-text-white {
+  color: white !important;
+}
+
