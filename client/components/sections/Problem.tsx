@@ -12,7 +12,7 @@ export default function Problem() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUpVariants}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <h2 className="gradient-text text-5xl font-normal leading-[120%] mb-6">
             Undercollateralized lending still doesn't work.
@@ -22,15 +22,15 @@ export default function Problem() {
           </p>
         </motion.div>
 
-        <div className="problem-cards-grid grid grid-cols-1 md:grid-cols-3 px-4 sm:px-6 lg:px-8 justify-items-center">
+        <div className="problem-cards-grid grid grid-cols-1 px-0 md:px-4 lg:px-8 justify-items-center">
           {/* Problem Card 1 */}
           <motion.div
-            className="problem-card-hover group relative rounded-[10px] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
+            className="problem-card-hover problem-card-1 group relative rounded-[10px] bg-gradient-to-br from-[rgba(191,234,68,0.04)] to-[rgba(191,234,68,0.14)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={tileVariants("left")}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], type: "spring", stiffness: 100, damping: 15 }}
           >
             <svg className="w-10 h-10 mb-8" viewBox="0 0 40 40" fill="none">
               <defs>
