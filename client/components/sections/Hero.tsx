@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import HeroImage from "@/assets/hero-section.svg";
 import FooterLogo from "@/assets/blocrate-footer-logo.svg";
+import "@/styles/Hero.css";
 
 export default function Hero() {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -8,41 +9,38 @@ export default function Hero() {
   const [clipStyle, setClipStyle] = useState<React.CSSProperties>({});
 
   useEffect(() => {
-    const updateClip = () => {
-      if (!buttonRef.current || !logoRef.current) return;
-
-      const buttonRect = buttonRef.current.getBoundingClientRect();
-      const logoRect = logoRef.current.getBoundingClientRect();
-
-      // Calculate the intersection between logo and button in viewport coordinates
+    const calculateClipPath = (
+      buttonRect: DOMRect,
+      logoRect: DOMRect
+    ): React.CSSProperties => {
       const overlapTop = Math.max(0, buttonRect.top - logoRect.top);
       const overlapBottom = Math.min(logoRect.height, buttonRect.bottom - logoRect.top);
       const overlapLeft = Math.max(0, buttonRect.left - logoRect.left);
       const overlapRight = Math.min(logoRect.width, buttonRect.right - logoRect.left);
 
-      // Only show if there's actual overlap
       if (overlapTop < overlapBottom && overlapLeft < overlapRight) {
-        // Calculate clip-path to show only the overlapping portion
-        // clip-path inset format: inset(top right bottom left)
         const clipTop = overlapTop;
         const clipRight = logoRect.width - overlapRight;
         const clipBottom = logoRect.height - overlapBottom;
         const clipLeft = overlapLeft;
-
-        setClipStyle({
+        return {
           clipPath: `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px)`,
-        });
-      } else {
-        setClipStyle({ clipPath: 'inset(100%)' });
+        };
       }
+      return { clipPath: "inset(100%)" };
     };
 
-    // Check on mount and resize
+    const updateClip = () => {
+      if (!buttonRef.current || !logoRef.current) return;
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      const logoRect = logoRef.current.getBoundingClientRect();
+      setClipStyle(calculateClipPath(buttonRect, logoRect));
+    };
+
     updateClip();
     window.addEventListener("resize", updateClip);
     window.addEventListener("scroll", updateClip);
 
-    // Continuous check for overlap updates
     let animationFrameId: number;
     const continuousCheck = () => {
       updateClip();
@@ -57,30 +55,7 @@ export default function Hero() {
     };
   }, []);
   return (
-    <>
-      <style>{`
-        .gradient-spread {
-          clip-path: circle(0% at 50% 50%);
-          transition: clip-path 0.3s ease-out 0.5s;
-        }
-        .group:hover .gradient-spread {
-          clip-path: circle(150% at 50% 50%);
-        }
-        .logo-fade-out {
-          opacity: 1;
-          transition: transform 0.3s ease-out, opacity 0.3s ease-out 0.5s;
-        }
-        .group:hover .logo-fade-out {
-          opacity: 0 !important;
-        }
-        .waitlist-text-white {
-          transition: color 0.3s ease-out 0.5s;
-        }
-        .group:hover .waitlist-text-white {
-          color: white !important;
-        }
-      `}</style>
-      <section className="relative w-full bg-black overflow-hidden">
+    <section className="relative w-full bg-black overflow-hidden">
         {/* Full width background hero image - extends from top and covers left/right */}
       <div className="relative w-full aspect-[1500/600]">
         <img
@@ -163,6 +138,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-    </>
   );
 }

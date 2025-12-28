@@ -1,0 +1,64 @@
+.howitworks-grid-1,
+.howitworks-grid-2 {
+  gap: 2px !important;
+}
+
+.howitworks-card {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.howitworks-card:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+.howitworks-card-1:hover {
+  border: 1px solid rgba(110, 68, 234, 0.16);
+  background: radial-gradient(493.58% 151.01% at 78.57% 0%, rgba(138, 56, 245, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%);
+  box-shadow: 0 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+  backdrop-filter: blur(10px);
+}
+
+.howitworks-card-2:hover {
+  border: 1px solid rgba(191, 234, 68, 0.16);
+  background: radial-gradient(488.65% 119.21% at 85.95% 15.16%, rgba(164, 176, 245, 0.60) 0%, rgba(255, 255, 255, 0.14) 100%);
+  box-shadow: 0 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+  backdrop-filter: blur(10px);
+}
+
+.howitworks-card-3:hover {
+  border: 1px solid rgba(191, 234, 68, 0.16);
+  background: radial-gradient(515.81% 123.58% at 90.71% 32.18%, rgba(53, 38, 166, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%);
+  box-shadow: 0 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+  backdrop-filter: blur(10px);
+}
+
+.howitworks-card-4:hover {
+  border: 1px solid rgba(191, 234, 68, 0.16);
+  background: radial-gradient(441.05% 109.67% at 79.76% 24.73%, rgba(38, 166, 72, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%);
+  box-shadow: 0 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+  backdrop-filter: blur(10px);
+}
+
+.howitworks-card-5:hover {
+  border: 1px solid rgba(191, 234, 68, 0.16);
+  background: radial-gradient(477.93% 122.93% at 83.81% 29.52%, rgba(38, 83, 166, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%);
+  box-shadow: 0 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+  backdrop-filter: blur(10px);
+}
+
+.howitworks-card:hover .howitworks-subtext {
+  color: white;
+}
+
+.howitworks-subtext {
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+

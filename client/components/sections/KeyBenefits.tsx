@@ -1,60 +1,17 @@
 import { motion } from "framer-motion";
-
-const tileVariants = (direction: "left" | "right") => ({
-  hidden: {
-    opacity: 0,
-    x: direction === "left" ? -100 : 100,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-  },
-});
+import { tileVariants, fadeInUpVariants } from "@/lib/animations";
+import "@/styles/KeyBenefits.css";
 
 export default function KeyBenefits() {
   return (
-    <>
-      <style>{`
-        .keybenefits-card {
-          opacity: 1;
-          transform: scale(1);
-          transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                      background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .keybenefits-card:hover {
-          opacity: 0.95;
-          transform: scale(1.02);
-        }
-        .keybenefits-card-1:hover {
-          border: 1px solid rgba(191, 234, 68, 0.16);
-          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
-          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
-          backdrop-filter: blur(10px);
-        }
-        .keybenefits-card-2:hover {
-          border: 1px solid rgba(191, 234, 68, 0.16);
-          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
-          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
-          backdrop-filter: blur(10px);
-        }
-        .keybenefits-card:hover .keybenefits-text {
-          color: white;
-        }
-        .keybenefits-text {
-          transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-      `}</style>
-      <section className="relative px-4 sm:px-6 lg:px-8 py-24">
+    <section className="relative px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-[1440px] mx-auto">
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUpVariants}
           transition={{ duration: 0.5 }}
         >
           <h2 className="gradient-text text-5xl font-normal leading-[120%]">
@@ -103,7 +60,6 @@ export default function KeyBenefits() {
         </div>
       </div>
     </section>
-    </>
   );
 }
 
