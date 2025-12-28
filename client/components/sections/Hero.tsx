@@ -56,14 +56,13 @@ export default function Hero() {
   }, []);
   return (
     <section className="relative w-full bg-black overflow-hidden">
-        {/* Full width background hero image - extends from top and covers left/right */}
+      {/* Full width background hero image - extends from top and covers left/right */}
       <div className="relative w-full aspect-[1500/600]">
         <img
           src={HeroImage}
           alt="DeFi Characters"
           className="absolute inset-0 w-full h-full object-cover"
         />
-      </div>
 
         {/* Content container with max-width for text alignment */}
         <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
@@ -79,61 +78,60 @@ export default function Hero() {
                 Private Credit Passports for DeFi
               </h1>
             </div>
-          </div>
 
-          {/* Join Waitlist Button - always visible */}
-          <div className="absolute top-[85%] left-1/2 -translate-x-1/2">
-            <div className="group relative inline-flex flex-col items-center">
-              {/* SVG Gradient Definition */}
-              <svg width="0" height="0" className="absolute">
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_24_162"
-                    x1="16"
-                    y1="-20"
-                    x2="237.5"
-                    y2="84.5"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#A4B0F5" />
-                    <stop offset="0.831731" stopColor="#3526A6" />
-                    <stop offset="1" stopColor="#E6F149" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <button
-                ref={buttonRef}
-                className="relative overflow-hidden px-14 py-3 bg-white rounded-[15px] shadow-lg z-10 transition-all duration-300 border-0 outline-none"
-              >
-                {/* Gradient background overlay - spreads from center on hover */}
-                <div 
-                  className="gradient-spread absolute inset-0"
-                  style={{
-                    background: 'linear-gradient(135deg, #A4B0F5 0%, #3526A6 83.1731%, #E6F149 100%)',
-                  }}
+            {/* Join Waitlist Button - always visible */}
+            <div className="absolute top-[85%] left-1/2 -translate-x-1/2">
+              <div className="group relative inline-flex flex-col items-center">
+                {/* SVG Gradient Definition */}
+                <svg width="0" height="0" className="absolute">
+                  <defs>
+                    <linearGradient
+                      id="paint0_linear_24_162"
+                      x1="16"
+                      y1="-20"
+                      x2="237.5"
+                      y2="84.5"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stopColor="#A4B0F5" />
+                      <stop offset="0.831731" stopColor="#3526A6" />
+                      <stop offset="1" stopColor="#E6F149" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <button
+                  ref={buttonRef}
+                  className="relative overflow-hidden px-14 py-3 bg-white rounded-[15px] shadow-lg z-10 transition-all duration-300 border-0 outline-none focus:outline-none focus:ring-0"
+                  style={{ border: 'none' }}
+                >
+                  {/* Gradient background overlay - spreads from center on hover */}
+                  <div 
+                    className="gradient-spread absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(135deg, #A4B0F5 0%, #3526A6 83.1731%, #E6F149 100%)',
+                    }}
+                  />
+                  {/* Invisible spacer to maintain button size */}
+                  <span className="relative text-black font-sans text-xl font-normal tracking-tight opacity-0 text-center">
+                    Join Waitlist
+                  </span>
+                </button>
+                {/* Gradient Logo - positioned below button, only overlapping portion visible on top */}
+                <img
+                  ref={logoRef}
+                  src={FooterLogo}
+                  alt=""
+                  style={clipStyle}
+                  className="logo-fade-out w-[75px] h-[54px] -mt-4 pointer-events-none z-20 group-hover:translate-y-[-40px]"
                 />
-                {/* Invisible spacer to maintain button size */}
-                <span className="relative text-black font-sans text-xl font-normal tracking-tight opacity-0 text-center">
-                  Join Waitlist
+                {/* Text overlay - positioned absolutely to match button text position, appears on top of logo */}
+                <span className="waitlist-text-white absolute top-2 left-0 right-0 flex items-center justify-center h-[38px] text-black font-sans text-2xl font-normal tracking-tight z-30 pointer-events-none">
+                  <span>Join</span>&nbsp;
+                  <span>Wait</span>
+                  <span>list</span>
                 </span>
-              </button>
-              {/* Gradient Logo - positioned below button, only overlapping portion visible on top */}
-              <img
-                ref={logoRef}
-                src={FooterLogo}
-                alt=""
-                style={clipStyle}
-                className="logo-fade-out w-[75px] h-[54px] -mt-4 pointer-events-none z-20 group-hover:translate-y-[-40px]"
-              />
-              {/* Text overlay - positioned absolutely to match button text position, appears on top of logo */}
-              <span className="waitlist-text-white absolute top-2 left-0 right-0 flex items-center justify-center h-[38px] text-black font-sans text-2xl font-normal tracking-tight z-30 pointer-events-none">
-                <span>Join</span>&nbsp;
-                <span>Wait</span>
-                <span>list</span>
-              </span>
+              </div>
             </div>
-          </div>
-
           </div>
         </div>
       </div>
