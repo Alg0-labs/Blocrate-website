@@ -4,42 +4,7 @@ import "@/styles/KeyBenefits.css";
 
 export default function KeyBenefits() {
   return (
-    <>
-      <style>{`
-        .keybenefits-card {
-          opacity: 1;
-          transform: scale(1);
-          transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                      background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                      box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .keybenefits-card:hover {
-          opacity: 0.95;
-          transform: scale(1.02);
-        }
-        .keybenefits-card-1:hover {
-          border: 1px solid rgba(191, 234, 68, 0.16);
-          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
-          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
-          backdrop-filter: blur(10px);
-        }
-        .keybenefits-card-2:hover {
-          border: 1px solid rgba(191, 234, 68, 0.16);
-          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
-          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
-          backdrop-filter: blur(10px);
-        }
-        .keybenefits-card:hover .keybenefits-text {
-          color: white;
-        }
-        .keybenefits-text {
-          transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-      `}</style>
-      <section className="relative px-4 sm:px-6 lg:px-8 py-24">
+    <section className="relative px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-[1440px] mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -95,7 +60,6 @@ export default function KeyBenefits() {
         </div>
       </div>
     </section>
-    </>
   );
 }
 
