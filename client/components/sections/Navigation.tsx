@@ -67,7 +67,7 @@ export default function Navigation() {
 
           {/* Join Waitlist Button - Shows when hero section is not visible */}
           <div
-            className={`transition-all duration-300 ${
+            className={`flex items-center transition-all duration-300 mt-8 ${
               showWaitlistButton
                 ? "opacity-100 translate-y-0 pointer-events-auto"
                 : "opacity-0 -translate-y-2 pointer-events-none"
