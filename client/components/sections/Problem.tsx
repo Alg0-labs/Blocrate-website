@@ -4,7 +4,61 @@ import "@/styles/Problem.css";
 
 export default function Problem() {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 py-14">
+    <>
+      <style>{`
+        .problem-cards-grid {
+          gap: 2px !important;
+        }
+        .problem-card-hover {
+          opacity: 1;
+          transform: scale(1);
+          border: none;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: 100%;
+          min-height: 262px;
+          transition: opacity 0.4s cubic-bezier(0.8, 0, 0.2, 1), 
+                      background 0.4s cubic-bezier(0.8, 0, 0.2, 1),
+                      backdrop-filter 0.4s cubic-bezier(0.8, 0, 0.2, 1),
+                      transform 0.4s cubic-bezier(0.8, 0, 0.2, 1);
+        }
+        @media (min-width: 768px) {
+          .problem-card-hover {
+            width: 351px;
+            height: 262px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .problem-card-hover {
+            width: 100%;
+            max-width: 351px;
+            height: 262px;
+          }
+        }
+        .problem-card-hover:hover {
+          background: radial-gradient(185.24% 85.06% at -23.5% 94.27%, rgba(255, 255, 255, 0.60) 0%, rgba(138, 56, 245, 0.60) 100%);
+          backdrop-filter: blur(10px);
+          opacity: 0.95;
+          transform: scale(1.02);
+          border: none;
+        }
+        .problem-card-2:hover {
+          border: none;
+          background: radial-gradient(174.92% 85.5% at 27.64% 129.01%, rgba(255, 255, 255, 0.03) 0%, rgba(138, 56, 245, 0.60) 100%);
+          backdrop-filter: blur(10px);
+        }
+        .problem-card-3:hover {
+          border: none;
+          background: radial-gradient(301.92% 99.26% at 106.41% 115.84%, rgba(255, 255, 255, 0.60) 0%, rgba(138, 56, 245, 0.60) 100%);
+          backdrop-filter: blur(10px);
+        }
+        .problem-card-hover:hover .card-subtext {
+          color: white;
+        }
+      `}</style>
+      <section className="relative px-4 sm:px-6 lg:px-8 py-14">
       <div className="max-w-[1440px] mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -106,6 +160,7 @@ export default function Problem() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
