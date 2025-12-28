@@ -12,14 +12,14 @@ export default function KeyBenefits() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUpVariants}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <h2 className="gradient-text text-5xl font-normal leading-[120%]">
             Key Benefits
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-[1200px] mx-auto">
           {/* For Lenders */}
           <motion.div
             className="keybenefits-card keybenefits-card-1 rounded-[17px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.06)] to-[rgba(191,234,68,0.24)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
@@ -27,7 +27,7 @@ export default function KeyBenefits() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={tileVariants("left")}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], type: "spring", stiffness: 100, damping: 15 }}
           >
             <h3 className="text-white text-[32px] font-medium leading-[150%] text-center mb-8">
               For Lenders

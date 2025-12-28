@@ -57,30 +57,34 @@ export default function Hero() {
   return (
     <section className="relative w-full bg-black overflow-hidden">
       {/* Full width background hero image - extends from top and covers left/right */}
-      <div className="relative w-full aspect-[1500/600]">
+      <div className="relative w-full aspect-[1500/600] md:aspect-[1500/600] min-h-[400px] md:min-h-0">
+        {/* Hide image on mobile, show on md and up */}
         <img
           src={HeroImage}
           alt="DeFi Characters"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover"
         />
 
         {/* Content container with max-width for text alignment */}
         <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="relative w-full h-full">
-            {/* Hero Text Overlays */}
-            <div className="absolute left-[8%] top-[20%] max-w-[315px]">
-              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-                Private Credit Passports for DeFi
-              </h1>
-            </div>
-            <div className="absolute right-[8%] top-[20%] max-w-[315px] text-right">
-              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-                Private Credit Passports for DeFi
-              </h1>
-            </div>
+          <div className="relative w-full h-full flex items-center justify-center md:block">
+            {/* Hero Text Overlays - hidden on mobile */}
 
-            {/* Join Waitlist Button - always visible */}
-            <div className="absolute top-[85%] left-1/2 -translate-x-1/2">
+            {/* TODO: replace with proper text */}
+
+            {/* <div className="hidden md:block absolute left-[8%] top-[20%] max-w-[315px]">
+              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
+                Private Credit Passports for DeFi
+              </h1>
+            </div>
+            <div className="hidden md:block absolute right-[8%] top-[20%] max-w-[315px] text-right">
+              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
+                Private Credit Passports for DeFi
+              </h1>
+            </div> */}
+
+            {/* Join Waitlist Button - centered on mobile, positioned on desktop */}
+            <div className="relative flex justify-center items-center md:absolute md:top-[85%] md:left-1/2 md:-translate-x-1/2 md:flex-none">
               <div className="group relative inline-flex flex-col items-center">
                 {/* SVG Gradient Definition */}
                 <svg width="0" height="0" className="absolute">
@@ -127,7 +131,8 @@ export default function Hero() {
                 {/* Text overlay - positioned absolutely to match button text position, appears on top of logo */}
                 <span className="waitlist-text-white absolute top-2 left-0 right-0 flex items-center justify-center h-[38px] text-black font-sans text-2xl font-normal tracking-tight z-30 pointer-events-none">
                   <span>Join</span>&nbsp;
-                  <span>Wait</span>
+
+                  <span className="wait-text-white">Wait</span>
                   <span>list</span>
                 </span>
               </div>

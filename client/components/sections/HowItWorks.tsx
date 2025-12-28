@@ -11,7 +11,7 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <h2 className="gradient-text text-5xl font-normal leading-[120%] mb-6">
             How It Works
@@ -29,7 +29,7 @@ export default function HowItWorks() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={tileVariants("left")}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], type: "spring", stiffness: 100, damping: 15 }}
           >
             <div className="text-white text-[64px] font-medium leading-[150%] mb-4">1.</div>
             <p className="howitworks-subtext text-brand-gray text-base font-medium leading-[150%]">

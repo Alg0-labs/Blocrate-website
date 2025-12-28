@@ -1,17 +1,49 @@
-.howitworks-grid-1,
+.howitworks-grid-1 {
+  gap: 1.5rem;
+}
+
 .howitworks-grid-2 {
-  gap: 2px !important;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .howitworks-grid-1 {
+    gap: 2px;
+  }
+  
+  .howitworks-grid-2 {
+    gap: 2px;
+  }
 }
 
 .howitworks-card {
   opacity: 1;
   transform: scale(1);
+  width: 100%;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
               background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Laptop view - fixed card dimensions */
+@media (min-width: 1024px) {
+  .howitworks-card {
+    width: 430px;
+    height: 188px;
+  }
+  
+  .howitworks-grid-1 {
+    justify-content: center;
+    justify-items: center;
+  }
+  
+  .howitworks-grid-2 {
+    justify-content: center;
+    justify-items: center;
+  }
 }
 
 .howitworks-card:hover {
