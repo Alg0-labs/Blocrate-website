@@ -13,7 +13,42 @@ const tileVariants = (direction: "left" | "right") => ({
 
 export default function KeyBenefits() {
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 py-24">
+    <>
+      <style>{`
+        .keybenefits-card {
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                      background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                      backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                      border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                      box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .keybenefits-card:hover {
+          opacity: 0.95;
+          transform: scale(1.02);
+        }
+        .keybenefits-card-1:hover {
+          border: 1px solid rgba(191, 234, 68, 0.16);
+          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
+          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+          backdrop-filter: blur(10px);
+        }
+        .keybenefits-card-2:hover {
+          border: 1px solid rgba(191, 234, 68, 0.16);
+          background: radial-gradient(251.65% 89.92% at 50.22% 50.31%, #A4B0F5 0%, #3526A6 100%);
+          box-shadow: 3px 3px 4px 0 rgba(191, 234, 68, 0.17) inset;
+          backdrop-filter: blur(10px);
+        }
+        .keybenefits-card:hover .keybenefits-text {
+          color: white;
+        }
+        .keybenefits-text {
+          transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      `}</style>
+      <section className="relative px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-[1440px] mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -30,7 +65,7 @@ export default function KeyBenefits() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto">
           {/* For Lenders */}
           <motion.div
-            className="rounded-[17px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.06)] to-[rgba(191,234,68,0.24)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
+            className="keybenefits-card keybenefits-card-1 rounded-[17px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.06)] to-[rgba(191,234,68,0.24)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -40,7 +75,7 @@ export default function KeyBenefits() {
             <h3 className="text-white text-[32px] font-medium leading-[150%] text-center mb-8">
               For Lenders
             </h3>
-            <ul className="text-brand-gray text-xl font-medium leading-[150%] space-y-2">
+            <ul className="keybenefits-text text-brand-gray text-xl font-medium leading-[150%] space-y-2">
               <li>• Lower default risk via hybrid proofs</li>
               <li>• Standardized credit read API</li>
               <li>• Policy controls and overrides</li>
@@ -49,7 +84,7 @@ export default function KeyBenefits() {
 
           {/* For Borrowers */}
           <motion.div
-            className="rounded-[17px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.06)] to-[rgba(191,234,68,0.24)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
+            className="keybenefits-card keybenefits-card-2 rounded-[17px] border border-[rgba(191,234,68,0.16)] bg-gradient-to-br from-[rgba(191,234,68,0.06)] to-[rgba(191,234,68,0.24)] shadow-[3px_3px_4px_0_rgba(191,234,68,0.17)_inset] glassmorphic p-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -59,7 +94,7 @@ export default function KeyBenefits() {
             <h3 className="text-white text-[32px] font-medium leading-[150%] text-center mb-8">
               For Borrowers
             </h3>
-            <ul className="text-brand-gray text-xl font-medium leading-[150%] space-y-2">
+            <ul className="keybenefits-text text-brand-gray text-xl font-medium leading-[150%] space-y-2">
               <li>• Access credit without overlocking crypto</li>
               <li>• Portable reputation across protocols</li>
               <li>• Privacy preserved by design</li>
@@ -68,6 +103,7 @@ export default function KeyBenefits() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
