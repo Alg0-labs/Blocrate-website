@@ -27,10 +27,10 @@ export default function WhatWereBuilding() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-x-2 lg:gap-y-6 lg:justify-items-center">
           {/* Feature Card 1 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -50,7 +50,7 @@ export default function WhatWereBuilding() {
 
           {/* Feature Card 2 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -70,7 +70,7 @@ export default function WhatWereBuilding() {
 
           {/* Feature Card 3 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -90,7 +90,7 @@ export default function WhatWereBuilding() {
 
           {/* Feature Card 4 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -110,7 +110,7 @@ export default function WhatWereBuilding() {
 
           {/* Feature Card 5 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -130,7 +130,7 @@ export default function WhatWereBuilding() {
 
           {/* Feature Card 6 */}
           <motion.div
-            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-[10px] p-8 text-center hover:shadow-xl transition-shadow duration-300 lg:flex lg:flex-col lg:w-[340px] lg:h-[311px] lg:justify-center lg:items-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
