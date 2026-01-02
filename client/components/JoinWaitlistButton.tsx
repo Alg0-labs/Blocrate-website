@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import FooterLogo from "@/assets/blocrate-footer-logo.svg";
 import "@/styles/Hero.css";
+import WaitlistDialog from "@/components/WaitlistDialog";
 
 interface JoinWaitlistButtonProps {
   variant?: "simple" | "with-logo";
@@ -20,6 +21,7 @@ export default function JoinWaitlistButton({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
   const [clipStyle, setClipStyle] = useState<React.CSSProperties>({});
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Size configurations
   const sizeConfig = {
@@ -98,8 +100,14 @@ export default function JoinWaitlistButton({
   // Generate unique ID for gradient to avoid conflicts
   const gradientId = `paint1_linear_${Math.random().toString(36).substr(2, 9)}`;
 
+  const handleButtonClick = () => {
+    setIsDialogOpen(true);
+    onClick?.();
+  };
+
   if (variant === "with-logo") {
     return (
+      <>
       <div className={`group relative inline-flex flex-col items-center justify-start ${className}`}>
         {/* SVG Gradient Definition */}
         <svg width="0" height="0" className="absolute">
@@ -120,7 +128,7 @@ export default function JoinWaitlistButton({
         </svg>
         <button
           ref={buttonRef}
-          onClick={onClick}
+          onClick={handleButtonClick}
           className={`relative overflow-hidden ${config.padding} bg-white rounded-[15px] shadow-lg z-10 transition-all duration-300 border-0 outline-none focus:outline-none focus:ring-0 ${className}`}
           style={{ border: "none" }}
         >
@@ -154,16 +162,19 @@ export default function JoinWaitlistButton({
           <span>list</span>
         </span>
       </div>
+      <WaitlistDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+      </>
     );
   }
 
   // Simple variant
   return (
-    <button
-      ref={buttonRef}
-      onClick={onClick}
-      className={`group relative inline-flex items-center justify-center ${config.padding} bg-white rounded-[15px] overflow-hidden hover:scale-105 transition-transform duration-300 ${className}`}
-    >
+    <>
+      <button
+        ref={buttonRef}
+        onClick={handleButtonClick}
+        className={`group relative inline-flex items-center justify-center ${config.padding} bg-white rounded-[15px] overflow-hidden hover:scale-105 transition-transform duration-300 ${className}`}
+      >
       <div className="absolute inset-0 bg-white"></div>
       {showArrow && (
         <svg
@@ -199,6 +210,8 @@ export default function JoinWaitlistButton({
         Join Waitlist
       </span>
     </button>
+    <WaitlistDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+    </>
   );
 }
 
