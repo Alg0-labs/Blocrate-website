@@ -1,9 +1,21 @@
 import { useEffect, useState } from "react";
-import LogoImage from "@/assets/blocrate-logo.svg";
+import LogoImageSvg from "@/assets/blocrate-logo.svg";
+import LogoImagePng from "@/assets/blocrate-logo.png";
 import JoinWaitlistButton from "@/components/JoinWaitlistButton";
+
+// Detect if browser is Safari
+const isSafari = () => {
+  if (typeof window === "undefined") return false;
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+};
 
 export default function Navigation() {
   const [showWaitlistButton, setShowWaitlistButton] = useState(false);
+  const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+
+  useEffect(() => {
+    setIsSafariBrowser(isSafari());
+  }, []);
 
   useEffect(() => {
     const heroSection = document.getElementById("hero-section");
@@ -43,7 +55,7 @@ export default function Navigation() {
         {/* Logo */}
         <div className="flex items-center">
           <img 
-            src={LogoImage} 
+            src={isSafariBrowser ? LogoImagePng : LogoImageSvg} 
             alt="Blocrate" 
             className="h-8 w-auto"
           />

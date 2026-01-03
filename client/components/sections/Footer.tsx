@@ -1,6 +1,20 @@
-import LogoImage from "@/assets/blocrate-logo.svg";
+import { useEffect, useState } from "react";
+import LogoImageSvg from "@/assets/blocrate-logo.svg";
+import LogoImagePng from "@/assets/blocrate-logo.png";
+
+// Detect if browser is Safari
+const isSafari = () => {
+  if (typeof window === "undefined") return false;
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+};
 
 export default function Footer() {
+  const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+
+  useEffect(() => {
+    setIsSafariBrowser(isSafari());
+  }, []);
+
   return (
     <footer className="relative px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
       {/* Footer gradient background */}
@@ -29,7 +43,7 @@ export default function Footer() {
         {/* Large logo */}
         <div className="flex justify-center py-12">
           <img     
-            src={LogoImage} 
+            src={isSafariBrowser ? LogoImagePng : LogoImageSvg} 
             alt="Blocrate" 
             className="max-w-[1322px] w-full h-auto opacity-80"
           />
