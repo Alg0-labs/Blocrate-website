@@ -1,24 +1,279 @@
+import { useRef, useEffect } from "react";
 import Spline from "@splinetool/react-spline";
+import type { Application } from "@splinetool/runtime";
 import JoinWaitlistButton from "@/components/JoinWaitlistButton";
 
 const SPLINE_SCENE_URL =
-  "https://prod.spline.design/94X8LGyghKjgdLfw/scene.splinecode";
+  "https://prod.spline.design/gWJGlg1yInlqKb5h/scene.splinecode";
 
 export default function Hero() {
+  const splineRef = useRef<Application | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const onLoad = (spline: Application) => {
+    splineRef.current = spline;
+    
+    // Disable camera controls to prevent zooming
+    const app = spline as any;
+    if (app.camera) {
+      // Disable orbit controls if they exist
+      if (app.camera.controls) {
+        const controls = app.camera.controls;
+        if (controls.enableZoom !== undefined) {
+          controls.enableZoom = false;
+        }
+        if (controls.enablePan !== undefined) {
+          controls.enablePan = false;
+        }
+      }
+    }
+    
+    // Aggressively disable zoom through the application's event listeners
+    // Wait a bit for the canvas to be rendered
+    setTimeout(() => {
+      const canvas = document.querySelector('canvas');
+      if (canvas) {
+        // Safari performance optimizations for canvas
+        const canvasStyle = (canvas as HTMLCanvasElement).style;
+        canvasStyle.willChange = "transform";
+        canvasStyle.transform = "translateZ(0)";
+        canvasStyle.backfaceVisibility = "hidden";
+        canvasStyle.webkitBackfaceVisibility = "hidden";
+        canvasStyle.webkitTransform = "translateZ(0)";
+        canvasStyle.isolation = "isolate";
+        
+        // Remove Spline watermark - check multiple times as it may be added dynamically
+        const removeWatermark = () => {
+          // Try various selectors for Spline watermark
+          const selectors = [
+            '[class*="spline-watermark"]',
+            '[id*="spline-watermark"]',
+            '[class*="SplineWatermark"]',
+            '[id*="SplineWatermark"]',
+            '[class*="watermark"]',
+            'a[href*="spline"]',
+          ];
+          
+          selectors.forEach((selector) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach((el) => {
+              const className = el.className?.toString() || '';
+              const id = el.id || '';
+              const href = (el as HTMLElement).getAttribute('href') || '';
+              
+              // Check if it's a Spline watermark
+              if (
+                (className.toLowerCase().includes('watermark') && className.toLowerCase().includes('spline')) ||
+                (id.toLowerCase().includes('watermark') && id.toLowerCase().includes('spline')) ||
+                (href.includes('spline') && (className.toLowerCase().includes('watermark') || id.toLowerCase().includes('watermark')))
+              ) {
+                (el as HTMLElement).style.display = "none";
+                (el as HTMLElement).style.visibility = "hidden";
+                (el as HTMLElement).style.opacity = "0";
+                (el as HTMLElement).style.pointerEvents = "none";
+                el.remove();
+              }
+            });
+          });
+        };
+        
+        // Remove immediately
+        removeWatermark();
+        
+        // Check periodically in case watermark is added dynamically
+        const watermarkInterval = setInterval(() => {
+          removeWatermark();
+        }, 500);
+        
+        // Clear interval after 10 seconds (watermark should be removed by then)
+        setTimeout(() => {
+          clearInterval(watermarkInterval);
+        }, 10000);
+        // Prevent ALL wheel events from reaching Spline canvas to prevent zoom
+        // But allow them to bubble up for page scrolling
+        const preventWheelOnCanvas = (e: WheelEvent) => {
+          // Prevent the event from affecting the Spline canvas
+          e.stopImmediatePropagation();
+          // Only prevent default for zoom gestures
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            return false;
+          }
+          // For normal scrolling, don't prevent default - let it bubble for page scroll
+          // But stop immediate propagation so Spline doesn't receive it
+        };
+        // Use capture phase to intercept before Spline receives it
+        canvas.addEventListener('wheel', preventWheelOnCanvas, { passive: false, capture: true });
+        // Also add in bubble phase as backup
+        canvas.addEventListener('wheel', preventWheelOnCanvas, { passive: false });
+        
+        // Rely on CSS touchAction for touch handling - it allows scrolling but prevents zoom
+        // Only add gesture event listeners for Safari (these don't interfere with scrolling)
+        
+        // Prevent gesture events (Safari) - these are critical for iOS Safari
+        const preventGesture = (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+        canvas.addEventListener('gesturestart', preventGesture, { passive: false, capture: true });
+        canvas.addEventListener('gesturechange', preventGesture, { passive: false, capture: true });
+        canvas.addEventListener('gestureend', preventGesture, { passive: false, capture: true });
+        
+        // Also add gesture listeners without capture
+        canvas.addEventListener('gesturestart', preventGesture, { passive: false });
+        canvas.addEventListener('gesturechange', preventGesture, { passive: false });
+        canvas.addEventListener('gestureend', preventGesture, { passive: false });
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    // Handle mouse movement for desktop
+    const handleMouseMove = (e: MouseEvent) => {
+      if (splineRef.current) {
+        // Normalize mouse coordinates to -1 to 1 range
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        
+        // Pass mouse position to Spline
+        // This allows the Spline scene to react to cursor movement
+        if (splineRef.current.setVariable) {
+          splineRef.current.setVariable("mouseX", x);
+          splineRef.current.setVariable("mouseY", y);
+        }
+      }
+    };
+
+    // Handle device orientation for mobile (gyroscope)
+    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (splineRef.current && e.beta !== null && e.gamma !== null) {
+        // Normalize device orientation angles to -1 to 1 range
+        // beta: front-back tilt (-180 to 180)
+        // gamma: left-right tilt (-90 to 90)
+        const x = Math.max(-1, Math.min(1, e.gamma / 45)); // Normalize gamma to -1 to 1
+        const y = Math.max(-1, Math.min(1, e.beta / 90)); // Normalize beta to -1 to 1
+        
+        // Pass device orientation to Spline
+        if (splineRef.current.setVariable) {
+          splineRef.current.setVariable("mouseX", x);
+          splineRef.current.setVariable("mouseY", y);
+        }
+      }
+    };
+
+    // Request permission for device orientation (iOS 13+)
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof (DeviceOrientationEvent as any).requestPermission === "function"
+    ) {
+      (DeviceOrientationEvent as any)
+        .requestPermission()
+        .then((response: string) => {
+          if (response === "granted") {
+            window.addEventListener("deviceorientation", handleDeviceOrientation);
+          }
+        })
+        .catch(() => {
+          // Permission denied or not supported
+        });
+    } else {
+      // For Android and older iOS, add listener directly
+      window.addEventListener("deviceorientation", handleDeviceOrientation);
+    }
+
+    // Add mouse move listener for desktop
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("deviceorientation", handleDeviceOrientation);
+    };
+  }, []);
+
+  // Prevent gesture events (Safari) on the container
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const preventGesture = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    };
+
+    container.addEventListener('gesturestart', preventGesture as EventListener, { passive: false });
+    container.addEventListener('gesturechange', preventGesture as EventListener, { passive: false });
+    container.addEventListener('gestureend', preventGesture as EventListener, { passive: false });
+
+    return () => {
+      container.removeEventListener('gesturestart', preventGesture as EventListener);
+      container.removeEventListener('gesturechange', preventGesture as EventListener);
+      container.removeEventListener('gestureend', preventGesture as EventListener);
+    };
+  }, []);
+
   return (
     <section
       id="hero-section"
       className="relative w-full h-screen bg-black overflow-hidden"
+      style={{
+        willChange: "transform",
+        transform: "translateZ(0)",
+        WebkitTransform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
     >
       {/* Full viewport hero area - powered by Spline animation */}
       <div className="relative w-full h-full">
-        {/* Spline animation - show on md and up to avoid heavy load on small devices */}
-        <div className="hidden md:block absolute inset-0 w-full h-full z-0">
-          <Spline scene={SPLINE_SCENE_URL} />
+        {/* Spline animation - visible on all breakpoints, fills available space */}
+        <div
+          ref={containerRef}
+          className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
+          style={{
+            touchAction: "pan-y pan-x", // Allow all panning (scrolling), prevent pinch zoom
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            WebkitTouchCallout: "none",
+            WebkitTapHighlightColor: "transparent",
+            WebkitTextSizeAdjust: "100%",
+            // Safari-specific zoom prevention via CSS
+            ...({
+              WebkitUserZoom: "none",
+              // Safari performance optimizations for smooth animation
+              WebkitTransform: "translateZ(0)",
+              WebkitBackfaceVisibility: "hidden",
+              WebkitPerspective: "1000",
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              willChange: "transform",
+              isolation: "isolate",
+            } as React.CSSProperties),
+          }}
+          // Don't handle wheel events here - let them bubble for page scrolling
+          // Wheel events are handled at canvas level to prevent Spline zoom
+          // Touch events are handled at canvas level to allow page scrolling
+        >
+          <Spline 
+            scene={SPLINE_SCENE_URL} 
+            onLoad={onLoad}
+            style={{
+              touchAction: "pan-y pan-x", // Allow scrolling, prevent pinch zoom
+              // Safari performance optimizations
+              WebkitTransform: "translateZ(0)",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "translateZ(0)",
+              backfaceVisibility: "hidden",
+              willChange: "transform",
+              isolation: "isolate",
+            }}
+          />
         </div>
 
         {/* Content container with max-width for text alignment */}
-        <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 z-10">
+        {/* pointer-events-none allows mouse events to pass through to Spline */}
+        <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 z-10 pointer-events-none">
           <div className="relative w-full h-full flex items-center justify-center md:block">
             {/* Hero Text Overlays - hidden on mobile */}
 
@@ -35,8 +290,9 @@ export default function Hero() {
               </h1>
             </div> */}
 
-            {/* Join Waitlist Button - centered on mobile, positioned on desktop */}
-            <div className="relative flex justify-center items-center md:absolute md:top-[85%] md:left-1/2 md:-translate-x-1/2 md:flex-none z-20">
+            {/* Join Waitlist Button - centered horizontally at bottom on mobile, centered on desktop */}
+            {/* pointer-events-auto re-enables pointer events for the button */}
+            <div className="absolute bottom-8 left-4 right-4 flex justify-center items-center md:top-[85%] md:left-1/2 md:right-auto md:-translate-x-1/2 md:flex-none z-20 pointer-events-auto">
               <JoinWaitlistButton variant="with-logo" size="large" />
             </div>
           </div>
