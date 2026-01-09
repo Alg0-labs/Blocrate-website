@@ -229,47 +229,40 @@ export default function Hero() {
       <div className="relative w-full h-full">
         {/* Spline animation - visible on all breakpoints, fills available space */}
         <div
-          ref={containerRef}
-          className="absolute inset-0 w-full h-full z-0 pointer-events-auto"
-          style={{
-            touchAction: "pan-y pan-x", // Allow all panning (scrolling), prevent pinch zoom
-            userSelect: "none",
-            WebkitUserSelect: "none",
-            WebkitTouchCallout: "none",
-            WebkitTapHighlightColor: "transparent",
-            WebkitTextSizeAdjust: "100%",
-            // Safari-specific zoom prevention via CSS
-            ...({
-              WebkitUserZoom: "none",
-              // Safari performance optimizations for smooth animation
-              WebkitTransform: "translateZ(0)",
-              WebkitBackfaceVisibility: "hidden",
-              WebkitPerspective: "1000",
-              transform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-              willChange: "transform",
-              isolation: "isolate",
-            } as React.CSSProperties),
-          }}
-          // Don't handle wheel events here - let them bubble for page scrolling
-          // Wheel events are handled at canvas level to prevent Spline zoom
-          // Touch events are handled at canvas level to allow page scrolling
-        >
-          <Spline 
-            scene={SPLINE_SCENE_URL} 
-            onLoad={onLoad}
-            style={{
-              touchAction: "pan-y pan-x", // Allow scrolling, prevent pinch zoom
-              // Safari performance optimizations
-              WebkitTransform: "translateZ(0)",
-              WebkitBackfaceVisibility: "hidden",
-              transform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-              willChange: "transform",
-              isolation: "isolate",
-            }}
-          />
-        </div>
+  ref={containerRef}
+  className="
+    absolute inset-0 z-0 pointer-events-auto overflow-hidden
+    w-[200%] h-[200%] -left-[50%] -top-[50%]   /* compensate for scale */
+    scale-[0.5] md:scale-100                  /* 50% zoom out on mobile */
+    md:w-full md:h-full md:left-0 md:top-0
+  "
+  style={{
+    transformOrigin: "center",
+    touchAction: "pan-y pan-x",
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    WebkitTouchCallout: "none",
+    WebkitTapHighlightColor: "transparent",
+    WebkitTextSizeAdjust: "100%",
+    // WebkitUserZoom: "none",
+    willChange: "transform",
+    isolation: "isolate",
+  }}
+>
+  <Spline
+    scene={SPLINE_SCENE_URL}
+    onLoad={onLoad}
+    style={{
+      width: "100%",
+      height: "100%",
+      touchAction: "pan-y pan-x",
+      willChange: "transform",
+      isolation: "isolate",
+    }}
+  />
+</div>
+
+
 
         {/* Content container with max-width for text alignment */}
         {/* pointer-events-none allows mouse events to pass through to Spline */}
