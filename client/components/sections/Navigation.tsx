@@ -12,6 +12,8 @@ const isSafari = () => {
 export default function Navigation() {
   const [showWaitlistButton, setShowWaitlistButton] = useState(false);
   const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     setIsSafariBrowser(isSafari());
@@ -42,6 +44,59 @@ export default function Navigation() {
     };
   }, []);
 
+  // Hide navigation while scrolling - optimized for smooth performance
+  useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+    let ticking = false;
+    let rafId: number | null = null;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY || window.pageYOffset;
+          
+          // Show navigation when at top, hide when scrolling down
+          if (currentScrollY < 10) {
+            setIsScrolling(false);
+          } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            // Scrolling down
+            setIsScrolling(true);
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling up
+            setIsScrolling(false);
+          }
+          
+          setLastScrollY(currentScrollY);
+          ticking = false;
+          rafId = null;
+        });
+        ticking = true;
+      }
+
+      // Clear timeout and reset scrolling state after scroll stops
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    };
+
+    // Use passive listeners for better scroll performance
+    window.addEventListener("scroll", handleScroll, { passive: true, capture: false });
+    window.addEventListener("touchmove", handleScroll, { passive: true, capture: false });
+    // Also listen to wheel events for trackpad/mouse wheel scrolling
+    window.addEventListener("wheel", handleScroll, { passive: true, capture: false });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchmove", handleScroll);
+      window.removeEventListener("wheel", handleScroll);
+      clearTimeout(scrollTimeout);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, [lastScrollY]);
+
   const scrollToHero = () => {
     const heroSection = document.getElementById("hero-section");
     if (heroSection) {
@@ -50,7 +105,18 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+    <nav 
+      className={`fixed top-0 left-0 right-0 w-full z-50 px-4 sm:px-6 lg:px-8 pt-8 pb-4 transition-transform duration-300 ease-in-out ${
+        isScrolling ? "-translate-y-full" : "translate-y-0"
+      }`}
+      style={{
+        willChange: "transform",
+        transform: "translateZ(0)",
+        WebkitTransform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
+    >
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">

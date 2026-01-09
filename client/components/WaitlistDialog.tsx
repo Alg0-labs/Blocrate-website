@@ -22,48 +22,120 @@ export default function WaitlistDialog({
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [dialogTop, setDialogTop] = useState<number | null>(null);
+  const [maxDialogHeight, setMaxDialogHeight] = useState<number | null>(null);
   const dialogContentRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
+  // Handle keyboard open/close on mobile and detect screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
   // Handle keyboard open/close on mobile
   useEffect(() => {
-    if (!open) return;
+    if (!open || !isMobile) {
+      setKeyboardOffset(0);
+      return;
+    }
 
-    const isMobile = window.innerWidth < 640; // sm breakpoint
+    let initialViewportHeight: number;
+    let initialWindowHeight: number;
+    
+    // Capture initial heights after a short delay to ensure dialog is rendered
+    const captureInitialHeights = () => {
+      initialViewportHeight = window.visualViewport?.height || window.innerHeight;
+      initialWindowHeight = window.innerHeight;
+    };
+    
+    // Capture after dialog opens
+    setTimeout(captureInitialHeights, 100);
 
     const handleViewportChange = () => {
-      // Only handle on mobile
       if (!isMobile) {
         setKeyboardOffset(0);
         return;
       }
 
-      if (window.visualViewport) {
-        const viewportHeight = window.visualViewport.height;
-        const windowHeight = window.innerHeight;
-        const offset = windowHeight - viewportHeight;
-        setKeyboardOffset(offset > 0 ? offset : 0);
+      const currentViewportHeight = window.visualViewport?.height || window.innerHeight;
+      const currentWindowHeight = window.innerHeight;
+      
+      // Calculate keyboard height
+      const viewportDiff = (initialViewportHeight || currentViewportHeight) - currentViewportHeight;
+      const windowDiff = (initialWindowHeight || currentWindowHeight) - currentWindowHeight;
+      
+      // Use the larger difference to detect keyboard
+      const keyboardHeight = Math.max(viewportDiff, windowDiff);
+      
+      if (keyboardHeight > 100) {
+        // Keyboard is open - move dialog up
+        setKeyboardOffset(keyboardHeight);
+        // Calculate top position - position it lower on screen (around 25% from top)
+        const visibleHeight = window.visualViewport?.height || window.innerHeight;
+        setDialogTop(Math.max(40, visibleHeight * 0.25));
+        setMaxDialogHeight(visibleHeight * 0.65);
+      } else {
+        // Keyboard is closed
+        setKeyboardOffset(0);
+        setDialogTop(null);
+        setMaxDialogHeight(null);
       }
     };
 
     // Use Visual Viewport API if available (better for mobile keyboards)
-    if (window.visualViewport && isMobile) {
+    if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", handleViewportChange);
-      window.visualViewport.addEventListener("scroll", handleViewportChange);
-    } else if (isMobile) {
-      // Fallback to window resize
-      window.addEventListener("resize", handleViewportChange);
     }
+    
+    // Also listen to window resize as fallback
+    window.addEventListener("resize", handleViewportChange);
+    
+    // Listen to input focus/blur events
+    const handleFocus = () => {
+      // Delay to allow keyboard to appear
+      setTimeout(() => {
+        captureInitialHeights();
+        handleViewportChange();
+      }, 300);
+    };
+    
+    const handleBlur = () => {
+      setTimeout(() => {
+        setKeyboardOffset(0);
+        setDialogTop(null);
+        setMaxDialogHeight(null);
+      }, 200);
+    };
+    
+    // Get input element after dialog is rendered
+    const setupInputListeners = () => {
+      const input = dialogContentRef.current?.querySelector('input');
+      if (input) {
+        input.addEventListener("focus", handleFocus);
+        input.addEventListener("blur", handleBlur);
+      }
+    };
+    
+    // Setup listeners after a short delay to ensure DOM is ready
+    setTimeout(setupInputListeners, 200);
 
     return () => {
       if (window.visualViewport) {
         window.visualViewport.removeEventListener("resize", handleViewportChange);
-        window.visualViewport.removeEventListener("scroll", handleViewportChange);
-      } else {
-        window.removeEventListener("resize", handleViewportChange);
       }
+      window.removeEventListener("resize", handleViewportChange);
     };
-  }, [open]);
+  }, [open, isMobile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,12 +180,30 @@ export default function WaitlistDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         ref={dialogContentRef}
-        className="bottom-0 left-1/2 top-auto -translate-x-1/2 translate-y-0 rounded-t-2xl rounded-b-none max-w-[425px] w-full data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom sm:bottom-auto sm:left-[50%] sm:top-[50%] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:translate-y-0 sm:rounded-lg sm:rounded-b-lg sm:data-[state=open]:slide-in-from-top-[48%] sm:data-[state=closed]:slide-out-to-top-[48%]"
+        className={`max-w-[425px] w-full z-[100] ${
+          isMobile
+            ? `left-1/2 rounded-t-2xl rounded-b-none data-[state=open]:slide-in-from-bottom data-[state=closed]:slide-out-to-bottom`
+            : "left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-lg data-[state=open]:slide-in-from-top-[48%] data-[state=closed]:slide-out-to-top-[48%]"
+        }`}
         style={{
-          ...(keyboardOffset > 0
+          ...(isMobile && keyboardOffset > 0 && dialogTop !== null
             ? {
-                transform: `translateX(-50%) translateY(-${keyboardOffset}px)`,
-                transition: "transform 0.2s ease-out",
+                // When keyboard is open, position from top of visible viewport
+                top: `${dialogTop}px`,
+                bottom: "auto",
+                transform: "translateX(-50%)",
+                transition: "top 0.3s ease-out, transform 0.3s ease-out",
+                position: "fixed",
+                left: "50%",
+                ...(maxDialogHeight !== null && { maxHeight: `${maxDialogHeight}px`, overflowY: "auto" as const }),
+              }
+            : isMobile
+            ? {
+                bottom: "0",
+                top: "auto",
+                transform: "translateX(-50%)",
+                position: "fixed",
+                left: "50%",
               }
             : {}),
         }}
