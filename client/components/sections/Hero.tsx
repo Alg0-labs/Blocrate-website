@@ -4,7 +4,7 @@ import type { Application } from "@splinetool/runtime";
 import JoinWaitlistButton from "@/components/JoinWaitlistButton";
 
 const SPLINE_SCENE_URL =
-  "https://prod.spline.design/gWJGlg1yInlqKb5h/scene.splinecode";
+  "https://prod.spline.design/I09j5NaQG3BA2agQ/scene.splinecode";
 
 export default function Hero() {
   const splineRef = useRef<Application | null>(null);
