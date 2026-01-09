@@ -13,11 +13,11 @@ export default function Index() {
     <div className="min-h-screen bg-black text-white font-manrope overflow-x-hidden">
       <Navigation />
       <Hero />
-      <Problem />
-      <Proof />
-      <HowItWorks />
-      <KeyBenefits />
-      <WhatWereBuilding />
+      {/* <Problem /> */}
+      {/* <Proof /> */}
+      {/* <HowItWorks /> */}
+      {/* <KeyBenefits /> */}
+      {/* <WhatWereBuilding /> */}
       {/* <CTA /> */}
       <Footer />
     </div>
