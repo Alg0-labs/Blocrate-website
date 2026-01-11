@@ -233,7 +233,7 @@ export default function Hero() {
   ref={containerRef}
   className="
     absolute inset-0 z-0 pointer-events-auto overflow-hidden
-    w-[200%] h-[200%] -left-[50%] -top-[80%]   /* compensate for scale */
+    w-[200%] h-[200%] -left-[50%] -top-[45%]   /* compensate for scale */
     scale-[0.5] md:scale-105            /* 50% zoom out on mobile, 105% on desktop */
     md:w-full md:h-full md:left-0 md:top-[10%]
   "
