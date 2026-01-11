@@ -4,7 +4,7 @@ import type { Application } from "@splinetool/runtime";
 import JoinWaitlistButton from "@/components/JoinWaitlistButton";
 
 const SPLINE_SCENE_URL =
-  "https://prod.spline.design/I09j5NaQG3BA2agQ/scene.splinecode";
+  "https://prod.spline.design/rbpdd-OGKo1fHBAD/scene.splinecode";
 
 export default function Hero() {
   const splineRef = useRef<Application | null>(null);
@@ -216,8 +216,9 @@ export default function Hero() {
   return (
     <section
       id="hero-section"
-      className="relative w-full h-screen bg-black overflow-hidden"
+      className="relative w-full h-screen overflow-hidden"
       style={{
+        background: "linear-gradient(135deg, #A4B0F5 0%, #3526A6 83.1731%, #E6F149 100%)",
         willChange: "transform",
         transform: "translateZ(0)",
         WebkitTransform: "translateZ(0)",
@@ -233,7 +234,7 @@ export default function Hero() {
   className="
     absolute inset-0 z-0 pointer-events-auto overflow-hidden
     w-[200%] h-[200%] -left-[50%] -top-[50%]   /* compensate for scale */
-    scale-[0.5] md:scale-100                  /* 50% zoom out on mobile */
+    scale-[0.5] md:scale-150                /* 50% zoom out on mobile, 110% on desktop */
     md:w-full md:h-full md:left-0 md:top-0
   "
   style={{

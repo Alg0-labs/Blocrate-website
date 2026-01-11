@@ -19,7 +19,7 @@ export default function Index() {
       {/* <KeyBenefits /> */}
       {/* <WhatWereBuilding /> */}
       {/* <CTA /> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
