@@ -9,6 +9,7 @@ const SPLINE_SCENE_URL =
 export default function Hero() {
   const splineRef = useRef<Application | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const buttonContainerRef = useRef<HTMLDivElement | null>(null);
 
   const onLoad = (spline: Application) => {
     splineRef.current = spline;
@@ -183,11 +184,45 @@ export default function Hero() {
     }
 
     // Add mouse move listener for desktop
-    window.addEventListener("mousemove", handleMouseMove);
+    // Use capture phase to ensure it works even when dialogs are open
+    // Also add to document to catch events that might be blocked by dialog overlays
+    const mouseMoveOptions = { capture: true, passive: true };
+    window.addEventListener("mousemove", handleMouseMove, mouseMoveOptions);
+    document.addEventListener("mousemove", handleMouseMove, mouseMoveOptions);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove, mouseMoveOptions);
+      document.removeEventListener("mousemove", handleMouseMove, mouseMoveOptions);
       window.removeEventListener("deviceorientation", handleDeviceOrientation);
+    };
+  }, []);
+
+  // Ensure mouse tracking works when hovering over the button
+  useEffect(() => {
+    const buttonContainer = buttonContainerRef.current;
+    if (!buttonContainer) return;
+
+    const handleButtonMouseMove = (e: MouseEvent) => {
+      if (splineRef.current) {
+        // Normalize mouse coordinates to -1 to 1 range
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        
+        // Pass mouse position to Spline
+        if (splineRef.current.setVariable) {
+          splineRef.current.setVariable("mouseX", x);
+          splineRef.current.setVariable("mouseY", y);
+        }
+      }
+    };
+
+    // Add listener to button container to ensure tracking works when cursor is over button
+    buttonContainer.addEventListener("mousemove", handleButtonMouseMove, { passive: true });
+    buttonContainer.addEventListener("mouseenter", handleButtonMouseMove, { passive: true });
+
+    return () => {
+      buttonContainer.removeEventListener("mousemove", handleButtonMouseMove);
+      buttonContainer.removeEventListener("mouseenter", handleButtonMouseMove);
     };
   }, []);
 
@@ -233,9 +268,9 @@ export default function Hero() {
   ref={containerRef}
   className="
     absolute inset-0 z-0 pointer-events-auto overflow-hidden
-    w-[200%] h-[200%] -left-[50%] -top-[45%]   /* compensate for scale */
-    scale-[0.5] md:scale-105            /* 50% zoom out on mobile, 105% on desktop */
-    md:w-full md:h-full md:left-0 md:top-[10%]
+    w-[200%] h-[200%] -left-[50%] -top-[30%]   /* compensate for scale */
+    scale-[0.8] md:scale-110          /* 40% zoom out on mobile, 80% on desktop */
+    md:w-full md:h-full md:left-0 md:top-[20%]
   "
   style={{
     transformOrigin: "center",
@@ -271,23 +306,15 @@ export default function Hero() {
           <div className="relative w-full h-full flex items-center justify-center md:block">
             {/* Hero Text Overlays - hidden on mobile */}
 
-            {/* TODO: replace with proper text */}
-
-            {/* <div className="hidden md:block absolute left-[8%] top-[20%] max-w-[315px]">
-              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-                Private Credit Passports for DeFi
-              </h1>
-            </div>
-            <div className="hidden md:block absolute right-8 top-[20%] max-w-[400px] text-right">
-              <h1 className="text-white text-[48px] font-semibold leading-[120%]">
+            {/* Centered text above Spline animation */}
+            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-full px-4 text-center z-20 flex flex-col items-center gap-4">
+              <h1 className="text-white text-[18px] md:text-[36px] font-bold leading-[120%] whitespace-nowrap">
                 Credit infrastructure for on-chain capital.
               </h1>
-            </div> */}
-
-            {/* Join Waitlist Button - centered horizontally at bottom on mobile, centered on desktop */}
-            {/* pointer-events-auto re-enables pointer events for the button */}
-            <div className="absolute bottom-8 left-4 right-4 flex justify-center items-center md:top-[85%] md:left-1/2 md:right-auto md:-translate-x-1/2 md:flex-none z-20 pointer-events-auto">
-              <JoinWaitlistButton variant="with-logo" size="large" />
+              {/* Join Waitlist Button - positioned just below the text */}
+              <div ref={buttonContainerRef} className="pointer-events-auto">
+                <JoinWaitlistButton variant="with-logo" size="large" />
+              </div>
             </div>
           </div>
         </div>
