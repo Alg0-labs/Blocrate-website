@@ -144,7 +144,7 @@ export default function Navigation() {
           </button> */}
 
           {/* Join Waitlist Button - Shows when hero section is not visible */}
-          <div
+          {/* <div
             className={`flex items-center transition-all duration-300 mt-8 ${
               showWaitlistButton
                 ? "opacity-100 translate-y-0 pointer-events-auto"
@@ -156,7 +156,7 @@ export default function Navigation() {
               size="small"
               onClick={scrollToHero}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

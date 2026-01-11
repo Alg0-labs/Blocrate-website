@@ -22,24 +22,25 @@ export default function JoinWaitlistButton({
   const logoRef = useRef<HTMLImageElement>(null);
   const [clipStyle, setClipStyle] = useState<React.CSSProperties>({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [textMarginRight, setTextMarginRight] = useState<string>('0px');
 
   // Size configurations
   const sizeConfig = {
     small: {
-      padding: "px-6 py-2",
-      textSize: "text-base",
+      padding: "px-5 py-1.5",
+      textSize: "text-sm",
       arrowSize: "w-[30px] h-[20px]",
       arrowLeft: "left-[60px]",
     },
     medium: {
-      padding: "px-12 py-4",
-      textSize: "text-2xl",
+      padding: "px-10 py-3",
+      textSize: "text-xl",
       arrowSize: "w-[41px] h-[27px]",
       arrowLeft: "left-[100px]",
     },
     large: {
-      padding: "px-14 py-3",
-      textSize: "text-xl",
+      padding: "px-10 py-2",
+      textSize: "text-base",
       arrowSize: "w-[41px] h-[27px]",
       arrowLeft: "left-[100px]",
     },
@@ -142,7 +143,7 @@ export default function JoinWaitlistButton({
           />
           {/* Invisible spacer to maintain button size */}
           <span
-            className={`relative text-black font-sans ${config.textSize} font-normal tracking-tight opacity-0 text-center`}
+            className={`relative text-black font-manrope ${config.textSize} font-normal tracking-tight opacity-0 text-center`}
           >
             Join Waitlist
           </span>
@@ -153,10 +154,10 @@ export default function JoinWaitlistButton({
           src={FooterLogo}
           alt=""
           style={clipStyle}
-          className={`logo-fade-out ${size === 'small' ? 'w-[50px] h-[36px] -mt-2 group-hover:translate-y-[-30px]' : 'w-[75px] h-[54px] -mt-4 group-hover:translate-y-[-40px]'} pointer-events-none z-20`}
+          className={`logo-fade-out ${size === 'small' ? 'w-[40px] h-[29px] -mt-1.5 group-hover:translate-y-[-25px]' : 'w-[50px] h-[36px] -mt-2.5 group-hover:translate-y-[-30px]'} pointer-events-none z-20`}
         />
         {/* Text overlay - positioned absolutely to match button text position, appears on top of logo */}
-        <span className={`waitlist-text-white absolute ${size === 'small' ? 'top-1 h-[28px]' : 'top-2 h-[38px]'} left-0 right-0 flex items-center justify-center text-black font-sans ${config.textSize} font-normal tracking-tight z-30 pointer-events-none`}>
+        <span className={`waitlist-text-white absolute ${size === 'small' ? 'top-1 h-[24px]' : 'top-1 h-[28px]'} left-0 right-0 flex items-center justify-center text-black font-manrope ${config.textSize} font-normal tracking-tight z-30 pointer-events-none`}>
           <span>Join</span>&nbsp;
           <span className="wait-text-white">Wait</span>
           <span>list</span>
@@ -167,50 +168,92 @@ export default function JoinWaitlistButton({
     );
   }
 
-  // Simple variant
+  // Calculate text margin to avoid arrow overlap (simple variant only)
+  useEffect(() => {
+    if (variant === "simple" && showArrow && buttonRef.current) {
+      const updateMargin = () => {
+        if (buttonRef.current) {
+          const buttonHeight = buttonRef.current.offsetHeight;
+          // Arrow is square, so width equals height
+          setTextMarginRight(`${buttonHeight}px`);
+        }
+      };
+      
+      updateMargin();
+      window.addEventListener('resize', updateMargin);
+      
+      return () => {
+        window.removeEventListener('resize', updateMargin);
+      };
+    }
+  }, [variant, showArrow]);
+
+  // Simple variant with sliding purple fill on hover
   return (
     <>
+      <style>{`
+        .early-access-btn {
+          position: relative;
+          overflow: hidden;
+        }
+        .early-access-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #A4B0F5 0%, #3526A6 83.1731%, #E6F149 100%);
+          transform: translateX(100%);
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 0;
+        }
+        .early-access-btn:hover::before {
+          transform: translateX(0);
+        }
+      `}</style>
       <button
         ref={buttonRef}
         onClick={handleButtonClick}
-        className={`group relative inline-flex items-center justify-center ${config.padding} bg-white rounded-[15px] overflow-hidden hover:scale-105 transition-transform duration-300 ${className}`}
+        className={`early-access-btn group relative inline-flex items-center justify-end pl-10 py-4 bg-white rounded-[15px] overflow-hidden ${className}`}
       >
-      <div className="absolute inset-0 bg-white"></div>
-      {showArrow && (
-        <svg
-          className={`absolute ${config.arrowLeft} bottom-0 ${config.arrowSize}`}
-          viewBox="0 0 47 14"
-          fill="none"
+        {/* Text - changes from dark to white on hover */}
+        <span
+          className={`relative z-10 font-sans ${config.textSize} font-bold tracking-tight text-gray-900 transition-colors duration-300 group-hover:text-white whitespace-nowrap pl-4`}
+          style={{ marginRight: showArrow ? `calc(${textMarginRight} + 1rem)` : '1rem' }}
         >
-          <path
-            d="M2.79651 30.0923L23.5219 9.82699L29.4874 14.8354L43.7965 3.09229"
-            stroke={`url(#${gradientId})`}
-            strokeWidth="8"
-            strokeMiterlimit="10"
-          />
-          <defs>
-            <linearGradient
-              id={gradientId}
-              x1="-0.00919021"
-              y1="16.483"
-              x2="46.3492"
-              y2="16.483"
-              gradientUnits="userSpaceOnUse"
+          Early Access
+        </span>
+        
+        {/* Gradient arrow box - integrated into button, extends to edges */}
+        {showArrow && (
+          <div className="absolute right-0 top-0 bottom-0 h-full w-auto aspect-square flex-shrink-0 z-10" style={{ borderTopRightRadius: '15px', borderBottomRightRadius: '15px', overflow: 'hidden' }}>
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <stop stopColor="#A4B0F5" />
-              <stop offset="0.451923" stopColor="#3526A6" />
-              <stop offset="1" stopColor="#E6F149" />
-            </linearGradient>
-          </defs>
-        </svg>
-      )}
-      <span
-        className={`relative z-10 text-black font-manrope ${config.textSize} font-normal tracking-tight`}
-      >
-        Join Waitlist
-      </span>
-    </button>
-    <WaitlistDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+              <defs>
+                <linearGradient id={`arrow-gradient-${gradientId}`} x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#A4B0F5" />
+                  <stop offset="83.1731%" stopColor="#3526A6" />
+                  <stop offset="100%" stopColor="#E6F149" />
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="32" height="32" rx="4" fill={`url(#arrow-gradient-${gradientId})`} />
+              <path
+                d="M11 21L21 11M21 11H15M21 11V17"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        )}
+      </button>
+      <WaitlistDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );
 }
