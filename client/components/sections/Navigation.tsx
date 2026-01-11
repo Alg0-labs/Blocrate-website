@@ -129,12 +129,12 @@ export default function Navigation() {
 
         {/* Navigation Links */}
         {/* <div className="hidden lg:flex items-center gap-12 px-10 py-4 rounded-full border border-white/12 bg-gradient-to-r from-black/6 to-black/24 shadow-[0_4px_4px_0_rgba(0,0,0,0.05)_inset] glassmorphic">
-          <a href="#home" className="text-white text-base font-medium hover:text-brand-green transition-colors">Home</a>
-          <a href="#about" className="text-white text-base font-medium hover:text-brand-green transition-colors">About</a>
+          <a href="#home" className="text-white text-base font-medium hover:text-brand-green transition-colors">For Borrowers</a>
+          <a href="#about" className="text-white text-base font-medium hover:text-brand-green transition-colors">For Lenders</a>
           <a href="#pages" className="text-white text-base font-medium hover:text-brand-green transition-colors">Pages</a>
           <a href="#blog" className="text-white text-base font-medium hover:text-brand-green transition-colors">Blog</a>
-          <a href="#contact" className="text-white text-base font-medium hover:text-brand-green transition-colors">Contact Us</a>
-        </div> */}
+          <a href="#contact" className="text-white text-base font-medium hover:text-brand-green transition-colors">Contact Us</a> 
+        </div>  */}
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-4">
