@@ -218,7 +218,7 @@ export default function Hero() {
       id="hero-section"
       className="relative w-full h-screen overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #A4B0F5 0%, #3526A6 83.1731%, #E6F149 100%)",
+        background: "linear-gradient(90deg, #0b0b0c 0%, #141318 25%, #1d1b2b 50%, #2b2670 75%, #1f1a5c 100%)",
         willChange: "transform",
         transform: "translateZ(0)",
         WebkitTransform: "translateZ(0)",
@@ -233,9 +233,9 @@ export default function Hero() {
   ref={containerRef}
   className="
     absolute inset-0 z-0 pointer-events-auto overflow-hidden
-    w-[200%] h-[200%] -left-[50%] -top-[50%]   /* compensate for scale */
-    scale-[0.5] md:scale-150                /* 50% zoom out on mobile, 110% on desktop */
-    md:w-full md:h-full md:left-0 md:top-0
+    w-[200%] h-[200%] -left-[50%] -top-[80%]   /* compensate for scale */
+    scale-[0.5] md:scale-105            /* 50% zoom out on mobile, 105% on desktop */
+    md:w-full md:h-full md:left-0 md:top-[10%]
   "
   style={{
     transformOrigin: "center",
@@ -267,7 +267,7 @@ export default function Hero() {
 
         {/* Content container with max-width for text alignment */}
         {/* pointer-events-none allows mouse events to pass through to Spline */}
-        <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 z-10 pointer-events-none">
+        <div className="absolute inset-0 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-1 z-10 pointer-events-none">
           <div className="relative w-full h-full flex items-center justify-center md:block">
             {/* Hero Text Overlays - hidden on mobile */}
 
@@ -278,9 +278,9 @@ export default function Hero() {
                 Private Credit Passports for DeFi
               </h1>
             </div>
-            <div className="hidden md:block absolute right-[8%] top-[20%] max-w-[315px] text-right">
-              <h1 className="text-white text-[40px] font-semibold leading-[120%]">
-                Private Credit Passports for DeFi
+            <div className="hidden md:block absolute right-8 top-[20%] max-w-[400px] text-right">
+              <h1 className="text-white text-[48px] font-semibold leading-[120%]">
+                Credit infrastructure for on-chain capital.
               </h1>
             </div> */}
 
