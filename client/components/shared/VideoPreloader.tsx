@@ -23,7 +23,6 @@ export const VideoPreloader: React.FC<VideoPreloaderProps> = ({ children }) => {
           <span className="w-2 h-2 rounded-full bg-biocrate-purple-light animate-bounce [animation-delay:150ms]" />
           <span className="w-2 h-2 rounded-full bg-biocrate-purple-light animate-bounce [animation-delay:300ms]" />
         </div>
-        <p className="mt-4 text-sm text-white/60">Loading...</p>
       </div>
     );
   }
