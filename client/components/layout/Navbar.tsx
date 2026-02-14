@@ -2,10 +2,9 @@ import React from "react";
 import blocrateLogo from "@/assets/blocrate-logo.png";
 
 const NAV_LINKS = [
-  { href: "#", label: "Features" },
-  { href: "#", label: "Token" },
-  { href: "#", label: "How it Works" },
-  { href: "#", label: "Roadmap" },
+  { href: "https://docs.blocrate.com/general/features", label: "Features" },
+  { href: "https://docs.blocrate.com", label: "How it Works" },
+  { href: "https://docs.blocrate.com/general/roadmap", label: "Roadmap" },
 ];
 
 interface NavbarProps {
@@ -28,16 +27,16 @@ export const Navbar: React.FC<NavbarProps> = ({
     <nav className="fixed top-0 left-0 right-0 z-[100] pt-4 sm:pt-6 lg:pt-10 px-4 sm:px-6">
       <div className="mx-auto w-full max-w-[1076px]">
         <div
-          className="flex items-center justify-between gap-3 px-4 sm:px-6 w-full min-h-[56px] sm:min-h-[62px] rounded-2xl sm:rounded-[35px] backdrop-blur-md"
+          className="relative flex items-center justify-between gap-3 px-4 sm:px-6 w-full min-h-[56px] sm:min-h-[62px] rounded-2xl sm:rounded-[35px] backdrop-blur-md"
           style={{ background: "rgba(25, 26, 27, 0.75)" }}
         >
           <div className="flex items-center gap-3 min-w-0 shrink-0">
             <img src={blocrateLogo} alt="Blocrate" className="h-6 sm:h-8 w-auto" />
           </div>
 
-          <div className="hidden lg:flex flex-1 items-center justify-center gap-6 xl:gap-10 shrink-0">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-6 xl:gap-10">
             {NAV_LINKS.map((link) => (
-              <a key={link.label} href={link.href} className={navLinkClass}>
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className={navLinkClass}>
                 {link.label}
               </a>
             ))}
@@ -103,6 +102,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.label}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block py-2.5 text-white text-xs font-medium uppercase tracking-[0.18em] hover:opacity-80"
                 onClick={onNavToggle}
               >

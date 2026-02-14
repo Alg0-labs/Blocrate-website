@@ -29,7 +29,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onJoinWaitlist,
 }) => (
   <>
-    <section className="relative z-50 flex flex-col min-h-screen md:min-h-[100dvh] overflow-hidden pt-[72px] sm:pt-[86px] lg:pt-[102px]">
+    <section className="relative z-50 flex flex-col min-h-screen md:min-h-[100dvh] overflow-visible pt-[72px] sm:pt-[86px] lg:pt-[102px]">
       <video
         src={heroSectionVid}
         autoPlay

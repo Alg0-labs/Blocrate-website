@@ -62,10 +62,12 @@ export const ForBuilders: React.FC = () => (
             regulatory perimeter.
           </p>
 
-          <button
-            className="bg-biocrate-purple-light text-biocrate-dark rounded-full font-semibold text-sm uppercase hover:bg-opacity-90 transition-colors"
+          <a
+            href="https://docs.blocrate.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-biocrate-purple-light text-biocrate-dark rounded-full font-semibold text-sm uppercase hover:bg-opacity-90 transition-colors inline-flex"
             style={{
-              display: "flex",
               width: "174px",
               height: "50px",
               justifyContent: "center",
@@ -75,7 +77,7 @@ export const ForBuilders: React.FC = () => (
             }}
           >
             Read Docs
-          </button>
+          </a>
         </div>
 
         <div className="relative flex items-center justify-center order-2 min-h-[280px] sm:min-h-[340px] xl:min-h-0">
