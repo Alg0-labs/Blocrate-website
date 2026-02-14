@@ -10,8 +10,8 @@ const FEATURES = [
 export const ForBuilders: React.FC = () => (
   <section className="relative bg-black py-8 sm:py-10 lg:py-16 px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden">
     <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <div className="text-left order-2 lg:order-1">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="text-left order-1">
           <h2
             className="mb-3 sm:mb-4"
             style={{
@@ -78,7 +78,7 @@ export const ForBuilders: React.FC = () => (
           </button>
         </div>
 
-        <div className="relative flex items-center justify-center order-1 lg:order-2 min-h-[280px] sm:min-h-[340px] lg:min-h-0">
+        <div className="relative flex items-center justify-center order-2 min-h-[280px] sm:min-h-[340px] xl:min-h-0">
           <div
             className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[418px] lg:h-[418px] rounded-full blur-[60px] sm:blur-[82px]"
             style={{
