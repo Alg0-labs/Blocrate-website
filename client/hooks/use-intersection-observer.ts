@@ -10,7 +10,7 @@ export function useIntersectionObserver(
   options: UseIntersectionObserverOptions = {}
 ): boolean {
   const { threshold = 0.2, rootMargin = "0px" } = options;
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(true);
 
   useEffect(() => {
     const el = ref.current;

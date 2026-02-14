@@ -29,7 +29,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onJoinWaitlist,
 }) => (
   <>
-    <section className="relative z-50 flex flex-col min-h-screen sm:min-h-[600px] lg:min-h-[821px] overflow-hidden pt-[72px] sm:pt-[86px] lg:pt-[102px]">
+    <section className="relative z-50 flex flex-col min-h-screen md:min-h-[100dvh] overflow-hidden pt-[72px] sm:pt-[86px] lg:pt-[102px]">
       <video
         src={heroSectionVid}
         autoPlay
@@ -57,7 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div
         ref={waitlistSectionRef}
         id="waitlist-section"
-        className="relative z-30 flex flex-1 min-h-0 sm:flex-initial flex-col items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20 pt-12 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-20"
+        className="relative z-30 flex flex-1 min-h-0 flex-col items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20 pt-12 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-20"
       >
         <div className="mb-4 sm:mb-6 lg:mb-8 w-full max-w-[791px] mx-auto text-center">
           <h1
@@ -90,8 +90,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[200px] sm:h-[300px] lg:h-[400px] bg-purple-600/30 rounded-full blur-3xl z-[1]" />
-    </section>
 
-    <HeroBanner />
+      <HeroBanner />
+    </section>
   </>
 );

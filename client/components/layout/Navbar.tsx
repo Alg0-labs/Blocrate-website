@@ -44,16 +44,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={waitlistInView ? undefined : onJoinWaitlist}
-              className={`inline-flex items-center justify-center font-medium text-sm uppercase hover:opacity-90 transition-opacity py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl sm:rounded-[28px] min-w-[120px] sm:min-w-0 shrink-0 ${
-                waitlistInView ? "invisible pointer-events-none" : ""
-              }`}
-              style={{ background: "#A3B0F6", color: "#000", border: "none" }}
-            >
-              JOIN WAITLIST
-            </button>
+            {!waitlistInView && (
+              <button
+                type="button"
+                onClick={onJoinWaitlist}
+                className="hidden lg:inline-flex items-center justify-center font-medium text-sm uppercase hover:opacity-90 transition-opacity py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl sm:rounded-[28px] min-w-[120px] sm:min-w-0 shrink-0"
+                style={{ background: "#A3B0F6", color: "#000", border: "none" }}
+              >
+                JOIN WAITLIST
+              </button>
+            )}
             <button
               type="button"
               onClick={onNavToggle}
@@ -109,6 +109,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {link.label}
               </a>
             ))}
+            {!waitlistInView && (
+              <button
+                type="button"
+                onClick={() => {
+                  onJoinWaitlist();
+                  onNavToggle();
+                }}
+                className="w-full flex items-center justify-center font-medium text-sm uppercase py-3 rounded-xl mt-2"
+                style={{ background: "#A3B0F6", color: "#000" }}
+              >
+                JOIN WAITLIST
+              </button>
+            )}
           </div>
         )}
       </div>

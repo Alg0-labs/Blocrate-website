@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useWaitlist } from "@/hooks/use-waitlist";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { useScrollPastHero } from "@/hooks/use-scroll-past-hero";
 import { WaitlistSuccessPopup } from "@/components/shared/WaitlistSuccessPopup";
 import { VideoPreloader } from "@/components/shared/VideoPreloader";
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -12,11 +12,7 @@ import { FooterSection } from "@/components/sections/FooterSection";
 export default function Index() {
   const [navOpen, setNavOpen] = useState(false);
   const waitlistSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const waitlistInView = useIntersectionObserver(waitlistSectionRef, {
-    threshold: 0.2,
-    rootMargin: "0px",
-  });
+  const hasScrolledPastHero = useScrollPastHero();
 
   const {
     email,
@@ -41,7 +37,7 @@ export default function Index() {
 
       <HeroSection
         waitlistSectionRef={waitlistSectionRef}
-        waitlistInView={waitlistInView}
+        waitlistInView={!hasScrolledPastHero}
         navOpen={navOpen}
         onNavToggle={() => setNavOpen((o) => !o)}
         onScrollToWaitlist={scrollToWaitlist}
