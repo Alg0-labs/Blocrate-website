@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useWaitlist } from "@/hooks/use-waitlist";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { WaitlistSuccessPopup } from "@/components/shared/WaitlistSuccessPopup";
+import { VideoPreloader } from "@/components/shared/VideoPreloader";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HowBlocrateWorks } from "@/components/sections/HowBlocrateWorks";
 import { BuiltForCreditPlatforms } from "@/components/sections/BuiltForCreditPlatforms";
@@ -34,6 +35,7 @@ export default function Index() {
   };
 
   return (
+    <VideoPreloader>
     <div className="min-h-screen bg-biocrate-dark text-white overflow-x-hidden">
       <WaitlistSuccessPopup show={showSuccess} />
 
@@ -57,5 +59,6 @@ export default function Index() {
 
       <FooterSection />
     </div>
+    </VideoPreloader>
   );
 }
