@@ -190,3 +190,16 @@
 .waitlist-success-popup {
   animation: waitlistPopupSlideDown 0.4s ease-out forwards;
 }
+
+/* Hide native video play button and controls (shown during load/slow connection) */
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+video::-webkit-media-controls {
+  display: none !important;
+}
+video {
+  -webkit-appearance: none;
+  appearance: none;
+}
