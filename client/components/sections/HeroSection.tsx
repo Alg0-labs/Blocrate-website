@@ -38,7 +38,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         playsInline
         className="absolute inset-0 w-full h-full object-cover opacity-90"
       />
-      <div className="absolute inset-0 z-[1] pointer-events-none">
+      <div className="absolute inset-0 z-[1] pointer-events-none glass-backdrop">
         <img
           src={heroGlass}
           alt=""

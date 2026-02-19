@@ -191,6 +191,12 @@
   animation: waitlistPopupSlideDown 0.4s ease-out forwards;
 }
 
+/* Glass backdrop blur */
+.glass-backdrop {
+  backdrop-filter: blur(44.5px);
+  -webkit-backdrop-filter: blur(44.5px);
+}
+
 /* Hide native video play button and controls (shown during load/slow connection) */
 video::-webkit-media-controls-start-playback-button,
 video::-webkit-media-controls-panel {
