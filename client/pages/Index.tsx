@@ -18,6 +18,7 @@ export default function Index() {
     email,
     showSuccess,
     error: emailError,
+    isSubmitting,
     handleEmailChange,
     handleJoin: handleJoinWaitlist,
   } = useWaitlist();
@@ -43,6 +44,7 @@ export default function Index() {
         onScrollToWaitlist={scrollToWaitlist}
         email={email}
         emailError={emailError}
+        isSubmitting={isSubmitting}
         onEmailChange={handleEmailChange}
         onJoinWaitlist={handleJoinWaitlist}
       />

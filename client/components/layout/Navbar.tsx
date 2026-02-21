@@ -10,7 +10,7 @@ const NAV_LINKS = [
 interface NavbarProps {
   navOpen: boolean;
   onNavToggle: () => void;
-  onJoinWaitlist: () => void;
+  onJoinWaitlist: () => void | Promise<void>;
   waitlistInView: boolean;
 }
 

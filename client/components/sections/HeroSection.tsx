@@ -13,8 +13,9 @@ interface HeroSectionProps {
   onScrollToWaitlist: () => void;
   email: string;
   emailError: string | null;
+  isSubmitting?: boolean;
   onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onJoinWaitlist: () => void;
+  onJoinWaitlist: () => void | Promise<void>;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -25,6 +26,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onScrollToWaitlist,
   email,
   emailError,
+  isSubmitting = false,
   onEmailChange,
   onJoinWaitlist,
 }) => (
@@ -57,11 +59,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div
         ref={waitlistSectionRef}
         id="waitlist-section"
-        className="relative z-30 flex flex-1 min-h-0 flex-col items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20 pt-12 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-20"
+        className="relative z-30 flex flex-1 min-h-0 items-center justify-center px-4 sm:px-6 md:px-10 lg:px-20"
       >
-        <div className="mb-4 sm:mb-6 lg:mb-8 w-full max-w-[791px] mx-auto text-center">
+        <div className="flex w-full max-w-[791px] flex-col items-center text-center">
           <h1
-            className="text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-[64px] font-semibold leading-tight sm:leading-[1.1] lg:leading-[58px] tracking-tight"
+            className="mb-4 sm:mb-6 lg:mb-8 text-center uppercase text-3xl sm:text-4xl md:text-5xl lg:text-[64px] font-semibold leading-tight sm:leading-[1.1] lg:leading-[58px] tracking-tight"
             style={{
               color: "#FFF",
               fontFamily: "Inter, sans-serif",
@@ -72,21 +74,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <br />
             <span style={{ color: "#E6F149" }}>FOR CRYPTO</span>
           </h1>
+
+          <p
+            className="mb-8 sm:mb-10 lg:mb-12 text-center text-sm sm:text-base lg:text-xl text-white max-w-[631px] leading-snug"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            We help crypto platforms assess credit risk and route loans.
+          </p>
+
+          <WaitlistForm
+            email={email}
+            error={emailError}
+            isSubmitting={isSubmitting}
+            onEmailChange={onEmailChange}
+            onJoin={onJoinWaitlist}
+          />
         </div>
-
-        <p
-          className="mb-8 sm:mb-10 lg:mb-12 text-center text-sm sm:text-base lg:text-xl text-white max-w-[631px] mx-auto leading-snug"
-          style={{ fontFamily: "Inter, sans-serif" }}
-        >
-          We help crypto platforms assess credit risk and route loans.
-        </p>
-
-        <WaitlistForm
-          email={email}
-          error={emailError}
-          onEmailChange={onEmailChange}
-          onJoin={onJoinWaitlist}
-        />
       </div>
 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[200px] sm:h-[300px] lg:h-[400px] bg-purple-600/30 rounded-full blur-3xl z-[1]" />

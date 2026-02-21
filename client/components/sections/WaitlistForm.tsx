@@ -3,13 +3,15 @@ import React from "react";
 interface WaitlistFormProps {
   email: string;
   error: string | null;
+  isSubmitting?: boolean;
   onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onJoin: () => void;
+  onJoin: () => void | Promise<void>;
 }
 
 export const WaitlistForm: React.FC<WaitlistFormProps> = ({
   email,
   error,
+  isSubmitting = false,
   onEmailChange,
   onJoin,
 }) => (
@@ -45,7 +47,8 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
       <button
         type="button"
         onClick={onJoin}
-        className="absolute right-0 bottom-0 inline-flex items-center justify-center font-medium text-sm uppercase hover:opacity-90 transition-opacity py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl sm:rounded-[28px] min-w-[120px] sm:min-w-0 shrink-0 z-10"
+        disabled={isSubmitting}
+        className="absolute right-0 bottom-0 inline-flex items-center justify-center font-medium text-sm uppercase hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl sm:rounded-[28px] min-w-[120px] sm:min-w-0 shrink-0 z-10"
         style={{
           background: "#A3B0F6",
           color: "#000",
@@ -53,7 +56,7 @@ export const WaitlistForm: React.FC<WaitlistFormProps> = ({
           marginBottom: "-1px",
         }}
       >
-        JOIN WAITLIST
+        {isSubmitting ? "JOINING…" : "JOIN WAITLIST"}
       </button>
     </div>
     {error && (
