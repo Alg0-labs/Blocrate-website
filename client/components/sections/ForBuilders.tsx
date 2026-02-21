@@ -278,8 +278,8 @@ export const ForBuilders: React.FC = () => {
       {/* Hero Section */}
       <section className="relative overflow-x-hidden">
         <div className="relative min-h-screen">
-          {/* Mobile: oval covers viewport (can crop), cards stay visible */}
-          <div className="absolute inset-0 md:hidden pointer-events-none">
+          {/* Mobile + iPad: oval covers viewport (can crop), cards stay visible */}
+          <div className="absolute inset-0 lg:hidden pointer-events-none">
             <img
               src={ellipseBg}
               alt=""
@@ -290,7 +290,7 @@ export const ForBuilders: React.FC = () => {
           <img
             src={ellipseBg}
             alt=""
-            className="hidden md:block w-full h-auto pointer-events-none"
+            className="hidden lg:block w-full h-auto pointer-events-none"
           />
           {/* Content overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pt-20 pb-0 z-10 min-h-screen">
@@ -320,7 +320,7 @@ export const ForBuilders: React.FC = () => {
         </div>
 
         {/* Cards Showcase */}
-        <div className="relative z-10 w-full mt-12 md:mt-16 lg:mt-20 px-4 pb-8 md:pb-0">
+        <div className="relative z-10 w-full mt-12 md:mt-16 lg:mt-20 px-4 pb-8 lg:pb-0">
           {/* Desktop layout: three cards in a row */}
           <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 max-w-6xl mx-auto">
             <div className="animate-float w-[260px] md:w-[300px] lg:w-[340px] flex-shrink-0 -mr-2 xl:-mr-8" style={{ animationDelay: "0.5s" }}>
@@ -334,19 +334,8 @@ export const ForBuilders: React.FC = () => {
             </div>
           </div>
 
-          {/* Tablet layout: phone in center, cards below */}
-          <div className="hidden md:flex lg:hidden flex-col items-center gap-6">
-            <PhoneMockup />
-            <div className="flex items-start justify-center gap-4 w-full">
-              <div className="w-[260px] md:w-[300px] flex-shrink-0">
-                <PaypeopleCard />
-              </div>
-              <StockCards />
-            </div>
-          </div>
-
-          {/* Mobile layout: Bitcoin on top, Paypeople below (no phone), full width */}
-          <div className="flex md:hidden flex-col items-stretch justify-center gap-3 px-4 w-full max-w-lg mx-auto">
+          {/* Mobile + iPad: Bitcoin on top, Paypeople below (no phone), full width — same as mobile */}
+          <div className="flex lg:hidden flex-col items-stretch justify-center gap-3 px-4 w-full max-w-lg mx-auto">
             <div className="w-full">
               <BitcoinCard />
             </div>

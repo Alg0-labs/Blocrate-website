@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import blocrateLogo from "../../assets/blocrate-logo.png";
 
 // Social icon SVGs
 function XIcon() {
@@ -105,7 +106,7 @@ function ArrowRightIcon() {
 function BlocrateLogoIcon() {
   return (
     <img
-      src="https://api.builder.io/api/v1/image/assets/TEMP/15acce868153e7699e39300df905e4f98c0d65bc?width=1602"
+      src={blocrateLogo}
       alt="Blocrato"
       className="w-full max-w-[600px] h-auto"
     />
