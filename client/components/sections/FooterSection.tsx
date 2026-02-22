@@ -247,32 +247,36 @@ export function FooterSection() {
 
           {/* Secondary nav */}
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {["Status", "Resouces", "Privacy Policy", "Terms of Service", "Brand Assets"].map((item) => (
+            {[
+              { label: "Status", to: "/status" },
+              { label: "Resources", to: "/resources" },
+              { label: "Privacy Policy", to: "/privacy-policy" },
+              { label: "Terms of Service", to: "/terms-of-service" },
+              { label: "Brand Assets", to: "/brand-assets" },
+            ].map(({ label, to }) => (
               <Link
-                key={item}
-                to="/"
+                key={label}
+                to={to}
                 className="text-white/[0.48] text-[13px] sm:text-[14px] leading-5 hover:text-white/70 transition-colors"
                 style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
               >
-                {item}
+                {label}
               </Link>
             ))}
             {[
-              { label: "Partnership Requests", href: "#" },
-              { label: "Forum", href: "#" },
-              { label: "Security", href: "#" },
-            ].map(({ label, href }) => (
-              <a
+              { label: "Partnership Requests", to: "/partnership-requests" },
+              { label: "Forum", to: "/forum" },
+              { label: "Security", to: "/security" },
+            ].map(({ label, to }) => (
+              <Link
                 key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={to}
                 className="text-white/[0.48] text-[13px] sm:text-[14px] leading-5 flex items-center gap-1 hover:text-white/70 transition-colors"
                 style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
               >
                 {label}
                 <ExternalLinkIcon />
-              </a>
+              </Link>
             ))}
           </nav>
 
