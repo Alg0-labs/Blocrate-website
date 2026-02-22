@@ -235,14 +235,14 @@ export function FooterSection() {
                 {label}
               </Link>
             ))}
-            <button
+            {/* <button
               type="button"
               className="text-white/[0.88] text-[16px] leading-6 flex items-center gap-1.5 hover:text-white transition-colors"
               style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
             >
               Past Events
               <ChevronDownIcon size={16} />
-            </button>
+            </button> */}
           </nav>
 
           {/* Secondary nav */}
@@ -306,7 +306,7 @@ export function FooterSection() {
             </div>
 
             {/* Language selector */}
-            <button
+            {/* <button
               type="button"
               className="flex items-center gap-1.5 h-8 px-2.5 rounded-full border border-white/[0.08] bg-[rgba(31,30,47,0.5)] backdrop-blur-[16px] hover:bg-[rgba(31,30,47,0.7)] transition-colors"
             >
@@ -318,7 +318,7 @@ export function FooterSection() {
                 EN
               </span>
               <ChevronDownIcon size={14} />
-            </button>
+            </button> */}
           </div>
 
           {/* Bottom bar — pinned to bottom of viewport */}
