@@ -5,6 +5,22 @@ import { supabase } from "@/lib/supabase";
 const SUCCESS_DURATION_MS = 4000;
 const WAITLIST_TABLE = "Blocrate-MVP-Waitlist";
 
+/** Get location string: try IP geolocation (country/city), fallback to timezone. */
+async function getLocation(): Promise<string> {
+  try {
+    const res = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) throw new Error("IP API error");
+    const data = (await res.json()) as { country_name?: string; city?: string; region?: string };
+    const parts = [data.city, data.region, data.country_name].filter(Boolean);
+    if (parts.length) return parts.join(", ");
+  } catch {
+    // fallback: timezone (e.g. "America/New_York")
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz) return tz;
+  }
+  return "Unknown";
+}
+
 export function useWaitlist() {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
@@ -35,8 +51,10 @@ export function useWaitlist() {
 
     setIsSubmitting(true);
     try {
+      const location = await getLocation();
       const { error: insertError } = await supabase.from(WAITLIST_TABLE).insert({
         email: trimmed,
+        location,
       });
 
       if (insertError) {
