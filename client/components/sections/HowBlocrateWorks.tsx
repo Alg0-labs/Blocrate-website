@@ -18,7 +18,7 @@ const SECTIONS = [
         <br className="hidden sm:block" />
         <br className="hidden sm:block" />
         Your on-chain activity is analyzed to understand repayment behavior,
-        usage patterns, and financial reliability — not just collateral or net
+        usage patterns, and financial reliability not just collateral or net
         worth.
       </>
     ),
@@ -34,7 +34,7 @@ const SECTIONS = [
         <br className="hidden sm:block" />
         Personal data is never shared.
         <br className="hidden sm:block" />
-        A credit score is generated, locked, and used by lenders — while identity
+        A credit score is generated, locked, and used by lenders while identity
         remains private unless a default occurs.
       </>
     ),
@@ -51,7 +51,7 @@ const SECTIONS = [
         <br className="hidden sm:block" />
         <br className="hidden sm:block" />
         Blocrate is a neutral credit layer that helps crypto platforms assess
-        risk and route credit — without holding funds or issuing loans.
+        risk and route credit without holding funds or issuing loans.
       </>
     ),
     video: animation1,

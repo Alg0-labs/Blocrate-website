@@ -159,15 +159,35 @@ export function FooterSection() {
                 Products
               </h3>
               <ul className="flex flex-col gap-4">
-                {["How it Works", "Features", "Security"].map((item) => (
-                  <li key={item}>
-                    <Link
-                      to="/"
-                      className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
-                      style={{ fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif" }}
-                    >
-                      {item}
-                    </Link>
+                {[
+                  { label: "How it Works", href: "https://docs.blocrate.com" },
+                  { label: "Features", to: "/features" },
+                  { label: "Security", to: "/features" },
+                ].map(({ label, to, href }) => (
+                  <li key={label}>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
+                        style={{
+                          fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif",
+                        }}
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={to!}
+                        className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
+                        style={{
+                          fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif",
+                        }}
+                      >
+                        {label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -182,15 +202,36 @@ export function FooterSection() {
                 Resource
               </h3>
               <ul className="flex flex-col gap-4">
-                {["Pitch Deck", "Documentation", "FAQs", "Integration"].map((item) => (
-                  <li key={item}>
-                    <Link
-                      to="/"
-                      className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
-                      style={{ fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif" }}
-                    >
-                      {item}
-                    </Link>
+                {[
+                  { label: "Pitch Deck", to: "/pitch-deck" },
+                  { label: "Documentation", href: "https://docs.blocrate.com" },
+                  { label: "FAQs", to: "/faqs" },
+                  { label: "Integration", to: "/integrations" },
+                ].map(({ label, to, href }) => (
+                  <li key={label}>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
+                        style={{
+                          fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif",
+                        }}
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={to!}
+                        className="text-[#A6A9A8] text-sm sm:text-[16px] leading-[120%] tracking-[-0.32px] hover:text-white transition-colors"
+                        style={{
+                          fontFamily: "'Helvetica Neue', -apple-system, Roboto, Helvetica, sans-serif",
+                        }}
+                      >
+                        {label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -224,17 +265,30 @@ export function FooterSection() {
               { label: "Home", to: "/" },
               { label: "Blog", to: "/blog" },
               { label: "Jobs", to: "/jobs" },
-              { label: "Docs", to: "/docs" },
-            ].map(({ label, to }) => (
-              <Link
-                key={label}
-                to={to}
-                className="text-white/[0.88] text-[16px] leading-6 hover:text-white transition-colors"
-                style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
-              >
-                {label}
-              </Link>
-            ))}
+              { label: "Docs", href: "https://docs.blocrate.com" },
+            ].map(({ label, to, href }) =>
+              href ? (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white/[0.88] text-[16px] leading-6 hover:text-white transition-colors"
+                  style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
+                >
+                  {label}
+                </a>
+              ) : (
+                <Link
+                  key={label}
+                  to={to!}
+                  className="text-white/[0.88] text-[16px] leading-6 hover:text-white transition-colors"
+                  style={{ fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif" }}
+                >
+                  {label}
+                </Link>
+              ),
+            )}
             {/* <button
               type="button"
               className="text-white/[0.88] text-[16px] leading-6 flex items-center gap-1.5 hover:text-white transition-colors"
@@ -285,19 +339,48 @@ export function FooterSection() {
             {/* Social icons */}
             <div className="flex items-center gap-9">
               {[
-                { icon: <XIcon />, label: "X (Twitter)" },
-                { icon: <ThreadsIcon />, label: "Threads" },
-                { icon: <InstagramIcon />, label: "Instagram" },
-                { icon: <DiscordIcon />, label: "Discord" },
-                { icon: <TelegramIcon />, label: "Telegram" },
-                { icon: <YouTubeIcon />, label: "YouTube" },
-                { icon: <LinkedInIcon />, label: "LinkedIn" },
-                { icon: <MailIcon />, label: "Email" },
-              ].map(({ icon, label }) => (
+                {
+                  icon: <XIcon />,
+                  label: "X (Twitter)",
+                  href: "https://x.com/blocrateglobal?s=21&t=VcyqBwZfJdu6klmdoYAjAQ",
+                },
+                {
+                  icon: <ThreadsIcon />,
+                  label: "Threads",
+                  href: "https://x.com/blocrateglobal?s=21&t=VcyqBwZfJdu6klmdoYAjAQ",
+                },
+                {
+                  icon: <InstagramIcon />,
+                  label: "Instagram",
+                  href: "https://www.instagram.com/blocrate",
+                },
+                {
+                  icon: <DiscordIcon />,
+                  label: "Discord",
+                  href: "https://discord.gg/czHvKfMya",
+                },
+                {
+                  icon: <TelegramIcon />,
+                  label: "Telegram",
+                  href: "https://t.me/Blocrate",
+                },
+                {
+                  icon: <LinkedInIcon />,
+                  label: "LinkedIn",
+                  href: "https://www.linkedin.com/company/blocrate/",
+                },
+                {
+                  icon: <MailIcon />,
+                  label: "Email",
+                  href: "mailto:info@blocrate.com",
+                },
+              ].map(({ icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
                   aria-label={label}
+                  target={href?.startsWith("http") ? "_blank" : undefined}
+                  rel={href?.startsWith("http") ? "noreferrer" : undefined}
                   className="opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
                 >
                   {icon}

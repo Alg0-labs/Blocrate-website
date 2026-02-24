@@ -31,6 +31,13 @@ const App = () => (
           <Route path="/forum" element={<ComingSoon title="Forum" />} />
           <Route path="/partnership-requests" element={<ComingSoon title="Partnership Requests" />} />
           <Route path="/security" element={<ComingSoon title="Security" />} />
+          <Route path="/features" element={<ComingSoon title="Features" />} />
+          <Route path="/security" element={<ComingSoon title="Security" />} />
+          <Route path="/pitch-deck" element={<ComingSoon title="Pitch Deck" />} />
+          <Route path="/faqs" element={<ComingSoon title="FAQs" />} />
+          <Route path="/integrations" element={<ComingSoon title="Integrations" />} />
+
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

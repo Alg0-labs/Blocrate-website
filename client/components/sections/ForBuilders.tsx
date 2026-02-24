@@ -25,53 +25,65 @@ function PaypassIcon() {
 function PaypeopleCard({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`rounded-[20px] p-4 md:p-5 ${className}`.trim()}
+      className={`relative overflow-hidden rounded-[20px] p-4 md:p-5 ${className}`.trim()}
       style={{
         background: "linear-gradient(140deg, rgba(63,63,63,0.90) 1.44%, rgba(63,63,63,0.90) 98.22%)",
         boxShadow: "0 4px 24px -1px rgba(0,0,0,0.08)",
-        backdropFilter: "blur(4px)",
+        filter: "blur(4px)",
       }}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <PaypeopleLogo />
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-white font-semibold text-[13px] font-plus-jakarta">
-                Paypeople Inc
-              </span>
-              <span className="text-[#C2C2C2] text-[11px] font-plus-jakarta">·</span>
-              <span className="text-[#C2C2C2] text-[12px] font-plus-jakarta">PYPL</span>
-            </div>
-            <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta">
-              Multinational Financial
-            </div>
-          </div>
-        </div>
-        <GreenChart />
-      </div>
-
+      {/* Glass blur overlay */}
       <div
-        className="w-full mb-3"
+        className="absolute inset-0"
         style={{
-          height: "1px",
-          background:
-            "repeating-linear-gradient(to right, #676B64 0, #676B64 5px, transparent 5px, transparent 10px)",
+          background: "rgba(16,16,16,0.10)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
         }}
       />
 
-      <div className="flex justify-between items-center">
-        <div>
-          <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Portfolio</div>
-          <div className="text-white font-bold text-[13px] font-plus-jakarta">$84.92</div>
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <PaypeopleLogo />
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-white font-semibold text-[13px] font-plus-jakarta">
+                  Paypeople Inc
+                </span>
+                <span className="text-[#C2C2C2] text-[11px] font-plus-jakarta">·</span>
+                <span className="text-[#C2C2C2] text-[12px] font-plus-jakarta">PYPL</span>
+              </div>
+              <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta">
+                Multinational Financial
+              </div>
+            </div>
+          </div>
+          <GreenChart />
         </div>
-        <div className="text-center">
-          <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Yield Value</div>
-          <div className="text-white font-bold text-[13px] font-plus-jakarta">+1.78%</div>
-        </div>
-        <div className="text-right">
-          <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Profits</div>
-          <div className="text-white font-bold text-[13px] font-plus-jakarta">$120.45</div>
+
+        <div
+          className="w-full mb-3"
+          style={{
+            height: "1px",
+            background:
+              "repeating-linear-gradient(to right, #676B64 0, #676B64 5px, transparent 5px, transparent 10px)",
+          }}
+        />
+
+        <div className="flex justify-between items-center">
+          <div>
+            <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Portfolio</div>
+            <div className="text-white font-bold text-[13px] font-plus-jakarta">$84.92</div>
+          </div>
+          <div className="text-center">
+            <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Yield Value</div>
+            <div className="text-white font-bold text-[13px] font-plus-jakarta">+1.78%</div>
+          </div>
+          <div className="text-right">
+            <div className="text-[#C2C2C2] text-[12px] font-plus-jakarta mb-0.5">Profits</div>
+            <div className="text-white font-bold text-[13px] font-plus-jakarta">$120.45</div>
+          </div>
         </div>
       </div>
     </div>
@@ -82,28 +94,12 @@ function PaypeopleCard({ className = "" }: { className?: string }) {
 function PhoneMockup() {
   return (
     <div className="relative flex-shrink-0 w-[240px] md:w-[310px] lg:w-[360px] -mt-4 md:-mt-8">
-      <div
-        className="relative rounded-[40px] md:rounded-[50px] lg:rounded-[60px] overflow-hidden"
-        style={{
-          background: "rgba(30, 20, 50, 0.95)",
-          boxShadow: "0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)",
-        }}
-      >
-        {/* Glass blur overlay */}
-        <div
-          className="absolute inset-0 rounded-[40px] md:rounded-[50px] lg:rounded-[60px]"
-          style={{
-            background: "rgba(16,16,16,0.10)",
-            backdropFilter: "blur(8px)",
-          }}
-        />
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/1049acd7f934f4737c9a5886d8140225f4c67771?width=1134"
           alt="Blocrate app UI"
           className="relative z-10 w-full blur-sm"
           style={{ display: "block" }}
         />
-      </div>
     </div>
   );
 }
@@ -192,51 +188,68 @@ function BitcoinLogo() {
 function BitcoinCard({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`rounded-[20px] p-4 md:p-5 ${className}`.trim()}
+      className={`relative overflow-hidden rounded-[20px] p-4 md:p-5 ${className}`.trim()}
       style={{
-        background: "#6D4BE8",
+        background: "rgba(109,75,232,0.90)",
         boxShadow: "0 4px 24px -1px rgba(0,0,0,0.08)",
-        backdropFilter: "blur(4px)",
+        filter: "blur(4px)",
       }}
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <BitcoinLogo />
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-brand-yellow font-semibold text-[13px] font-plus-jakarta">
-                Bitcoin Inc
-              </span>
-              <span className="text-white/70 text-[11px] font-plus-jakarta">·</span>
-              <span className="text-white/70 text-[12px] font-plus-jakarta">BTC</span>
-            </div>
-            <div className="text-white/60 text-[12px] font-plus-jakarta">
-              Multinational Financial
-            </div>
-          </div>
-        </div>
-        <YellowChart />
-      </div>
+      {/* Glass blur overlay */}
       <div
-        className="w-full mb-3"
+        className="absolute inset-0"
         style={{
-          height: "1px",
-          background:
-            "repeating-linear-gradient(to right, rgba(255,255,255,0.6) 0, rgba(255,255,255,0.6) 5px, transparent 5px, transparent 10px)",
+          background: "rgba(16,16,16,0.10)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
         }}
       />
-      <div className="flex justify-between items-center">
-        <div>
-          <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Portfolio</div>
-          <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">$84.92</div>
+
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <BitcoinLogo />
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-brand-yellow font-semibold text-[13px] font-plus-jakarta">
+                  Bitcoin Inc
+                </span>
+                <span className="text-white/70 text-[11px] font-plus-jakarta">·</span>
+                <span className="text-white/70 text-[12px] font-plus-jakarta">BTC</span>
+              </div>
+              <div className="text-white/60 text-[12px] font-plus-jakarta">
+                Multinational Financial
+              </div>
+            </div>
+          </div>
+          <YellowChart />
         </div>
-        <div className="text-center">
-          <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Yield Value</div>
-          <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">+1.78%</div>
-        </div>
-        <div className="text-right">
-          <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Profits</div>
-          <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">$120.45</div>
+
+        <div
+          className="w-full mb-3"
+          style={{
+            height: "1px",
+            background:
+              "repeating-linear-gradient(to right, rgba(255,255,255,0.6) 0, rgba(255,255,255,0.6) 5px, transparent 5px, transparent 10px)",
+          }}
+        />
+        <div className="flex justify-between items-center">
+          <div>
+            <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Portfolio</div>
+            <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">$84.92</div>
+          </div>
+          <div className="text-center">
+            <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Yield Value</div>
+            <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">
+              +1.78%
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-white/70 text-[12px] font-plus-jakarta mb-0.5">Profits</div>
+            <div className="text-brand-yellow font-bold text-[13px] font-plus-jakarta">
+              $120.45
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -320,16 +333,22 @@ export const ForBuilders: React.FC = () => {
         </div>
 
         {/* Cards Showcase */}
-        <div className="relative z-10 w-full mt-12 md:mt-16 lg:mt-20 px-4 pb-8 lg:pb-0">
-          {/* Desktop layout: three cards in a row */}
-          <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 max-w-6xl mx-auto">
-            <div className="animate-float w-[260px] md:w-[300px] lg:w-[340px] flex-shrink-0 -mr-2 xl:-mr-8" style={{ animationDelay: "0.5s" }}>
+        <div className="relative z-10 w-full mt-10 md:mt-14 lg:mt-16 px-4 pb-8 lg:pb-0">
+          {/* Desktop layout: three cards in a row, tight and centered */}
+          <div className="hidden lg:flex items-center justify-center gap-0 max-w-5xl mx-auto">
+            <div
+              className="animate-float w-[240px] md:w-[280px] lg:w-[300px] flex-shrink-0"
+              style={{ animationDelay: "0.5s" }}
+            >
               <PaypeopleCard />
             </div>
             <div className="animate-float">
               <PhoneMockup />
             </div>
-            <div className="animate-float -ml-4 xl:-ml-8" style={{ animationDelay: "1s" }}>
+            <div
+              className="animate-float w-[230px] md:w-[250px] lg:w-[270px] flex-shrink-0 -ml-8 xl:-ml-10"
+              style={{ animationDelay: "1s" }}
+            >
               <StockCards />
             </div>
           </div>
