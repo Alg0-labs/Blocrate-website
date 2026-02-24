@@ -242,7 +242,7 @@ export function FooterSection() {
         {/* Bottom footer */}
         <div className="px-5 sm:px-10 md:px-20 py-8 flex-1 flex flex-col items-center gap-8">
           {/* Newsletter input */}
-          <div className="relative w-full max-w-[344px] h-16 rounded-[4px] border border-white/[0.08] bg-white/[0.04] flex items-center px-4">
+          {/* <div className="relative w-full max-w-[344px] h-16 rounded-[4px] border border-white/[0.08] bg-white/[0.04] flex items-center px-4">
             <input
               type="email"
               value={email}
@@ -257,7 +257,7 @@ export function FooterSection() {
             >
               <ArrowRightIcon />
             </button>
-          </div>
+          </div> */}
 
           {/* Primary nav */}
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3">
