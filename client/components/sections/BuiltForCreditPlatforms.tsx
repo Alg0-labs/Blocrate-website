@@ -1,5 +1,5 @@
 import React from "react";
-import mobileMockupVid from "@/assets/mobile-mockup.MOV";
+import mobileMockupVid from "@/assets/mobile-mockup.mp4";
 
 export const BuiltForCreditPlatforms: React.FC = () => (
   <section className="relative bg-black py-12 sm:py-16 lg:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
