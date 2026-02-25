@@ -36,6 +36,7 @@ const App = () => (
           <Route path="/pitch-deck" element={<ComingSoon title="Pitch Deck" />} />
           <Route path="/faqs" element={<ComingSoon title="FAQs" />} />
           <Route path="/integrations" element={<ComingSoon title="Integrations" />} />
+          <Route path="/docs" element={<ComingSoon title="Docs" />} />
 
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

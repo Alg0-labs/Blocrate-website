@@ -2,9 +2,9 @@ import React from "react";
 import blocrateLogo from "@/assets/blocrate-logo.png";
 
 const NAV_LINKS = [
-  { href: "https://docs.blocrate.com/general/features", label: "Features" },
-  { href: "https://docs.blocrate.com", label: "How it Works" },
-  { href: "https://docs.blocrate.com/general/roadmap", label: "Roadmap" },
+  { href: "/docs", label: "Features" },
+  { href: "/docs", label: "How it Works" },
+  { href: "/docs", label: "Roadmap" },
 ];
 
 interface NavbarProps {
